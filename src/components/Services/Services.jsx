@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Services.css"
-// import theme_pattern from "../../assets/theme_pattern.png"
+// import theme_pattern from "../../assets/theme_pattern.svg"
 // import arrow_icon from "../../assets/arrow_icon.svg"
 
 
