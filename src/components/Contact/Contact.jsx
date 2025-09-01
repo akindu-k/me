@@ -15,7 +15,7 @@ const Contact = () => {
         event.preventDefault();
         const formData = new FormData(event.target);
     
-        formData.append("access_key", "9d5d1271-c5d3-431a-9afc-e1ce6f506fc6");
+        formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "");
     
         const object = Object.fromEntries(formData);
         const json = JSON.stringify(object);
@@ -69,7 +69,7 @@ const Contact = () => {
             <div className="contact-section">
                 <div className="contact-left">
                     <h1>Let's talk</h1>
-                    <p>I'm currently avaliable to take on new projects, so feel free to send me a message about anything that you want me to work on. You can contact anytime.</p>
+                    <p>I'm currently open to internship opportunities and projects. Feel free to reach out anytime to discuss ideas or potential collaborations, I'd love to contribute and learn!</p>
                     <div className="contact-details">
                         <div className="contact-detail">
                             <img src={mail_icon} alt="" /><p>akinduk619@gmail.com</p>

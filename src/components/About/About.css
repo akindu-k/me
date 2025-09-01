@@ -1,3 +1,4 @@
+/* filepath: /home/akindu/Documents/portfolio-akindu/src/components/About/About.css */
 .about{
     display: flex;
     flex-direction: column;
@@ -46,20 +47,20 @@
 }
 
 .about-skills{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 40px;
 }
 
 .about-skill{
     display: flex;
-    gap: 50px;
+    gap: 20px;
     align-items: center;
     transition: 0.3s;
 }
 
 .about-skill p{
-    min-width: 150px;
+    min-width: 100px;
     font-size: 24px;
     font-weight: 500;
 }
@@ -68,7 +69,7 @@
 .about-skill hr{
     outline: none;
     border: none;
-    width: 50%;
+    width: 100%;
     height: 8px;
     border-radius: 50px;
     background: linear-gradient(264deg, #DF8908 -5.09%, #B415FF 106.28%);
@@ -140,11 +141,15 @@
         font-size: 18px;
         line-height: 32px;        
     }
+    
+    .about-skills{
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 
     .about-skill{
         gap: 20px;
         align-items: center;
-
     }
 
     .about-skill p{

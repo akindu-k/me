@@ -2,12 +2,12 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 35 px;
+    gap: 35px;
 } 
 
 
 .hero img{
-    margin-top: 150px;
+    margin-top: 50px;
     width: 200px;
     height: auto;
     border-radius: 50%;
@@ -16,7 +16,7 @@
 .hero h1{
     text-align: center;
     width: 70%;
-    font-size: 90px;
+    font-size: 80px;
     font-weight: 600;
 }
 
