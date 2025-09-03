@@ -45,18 +45,18 @@ const mywork_data = [
     },
     {
         w_no: 5,
-        w_name: "Wind Energy Feasibility Study",
-        w_desc: "Led site assessment and technical feasibility study for a 2MW wind farm project in coastal Sri Lanka.",
+        w_name: "TripMate",
+        w_desc: "Developed a web application that helps users plan budget-efficient trips by integrating cost estimation, itinerary planning, and trip optimization. Built with React for the frontend and Spring Boot for the backend, ensuring a scalable and user-friendly travel planning experience.",
         w_img: project5_img,
-        w_tags: ["Renewable Energy", "Feasibility", "Wind Power"],
+        w_tags: ["ReactJS", "Spring Boot", "Full-Stack Development"],
         w_github: "https://github.com/Company-B-MSD/tripmate"
     },
     {
         w_no: 6,
-        w_name: "Building Management System",
-        w_desc: "Designed and implemented an integrated BMS for a smart office complex, controlling HVAC, lighting, and security systems.",
+        w_name: "Codebase Genius",
+        w_desc: "Built an AI documentation agent that ingests GitHub repositories and automatically generates structured, visual, and easy-to-understand documentation. The system uses a team of specialized agents — including a Repo Mapper, Code Analyzer, and DocGenie, coordinated by a Supervisor agent to map project structures, analyze code dependencies, and create cohesive documentation.",
         w_img: project6_img,
-        w_tags: ["BMS", "Smart Buildings", "System Integration"],
+        w_tags: ["AI Agents", "Automation", "Developer Tools"],
         w_github: "https://github.com/RavimalRanathunga/Team-Nova-Codebase-Genius"
     }
 ];
