@@ -197,7 +197,12 @@
         gap: 20px;
     }
     
-    .hero-connect, .hero-resume {
+    .hero-connect {
+        width: 100%;
+        text-align: center;
+        padding: 15px 20px;
+    }
+    .hero-resume {
         width: 100%;
         text-align: center;
         padding: 15px 20px;
