@@ -2,7 +2,7 @@
   "name": "portfolio-akindu",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://akindu-k.github.io/portfolio-akindu-kalhan/",
+  "homepage": "https://akindu-k.github.io/me/",
   "type": "module",
   "scripts": {
     "dev": "vite",
