@@ -25,7 +25,7 @@ const Navbar = () => {
         <img src={menu_close} onClick={closeMenu} alt="" className="nav-mob-close" />
         <li onClick={() => setMenu("home")}><AnchorLink className='anchor-link' offset={50} href='#home'><p className={menu === "home" ? "active" : ""}>Home</p></AnchorLink></li>
         <li onClick={() => setMenu("about")}><AnchorLink className='anchor-link' offset={50} href='#about'><p className={menu === "about" ? "active" : ""}>About Me</p></AnchorLink></li>
-        <li onClick={() => setMenu("services")}><AnchorLink className='anchor-link' offset={50} href='#services'><p className={menu === "services" ? "active" : ""}>Services</p></AnchorLink></li>
+        {/* <li onClick={() => setMenu("services")}><AnchorLink className='anchor-link' offset={50} href='#services'><p className={menu === "services" ? "active" : ""}>Services</p></AnchorLink></li> */}
         <li onClick={() => setMenu("work")}><AnchorLink className='anchor-link' offset={50} href='#work'><p className={menu === "work" ? "active" : ""}>Portfolio</p></AnchorLink></li>
         <li onClick={() => setMenu("contact")}><AnchorLink className='anchor-link' offset={50} href='#contact'><p className={menu === "contact" ? "active" : ""}>Contact</p></AnchorLink></li>
       </ul>
