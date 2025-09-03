@@ -54,7 +54,7 @@ const mywork_data = [
     {
         w_no: 6,
         w_name: "Codebase Genius",
-        w_desc: "Built an AI documentation agent that ingests GitHub repositories and automatically generates structured, visual, and easy-to-understand documentation. The system uses a team of specialized agents — including a Repo Mapper, Code Analyzer, and DocGenie, coordinated by a Supervisor agent to map project structures, analyze code dependencies, and create cohesive documentation.",
+        w_desc: "Built an AI documentation agent that ingests GitHub repos and automatically generates clear, structured, and visual documentation using specialized agents for mapping, code analysis, and generation.",
         w_img: project6_img,
         w_tags: ["AI Agents", "Automation", "Developer Tools"],
         w_github: "https://github.com/RavimalRanathunga/Team-Nova-Codebase-Genius"
