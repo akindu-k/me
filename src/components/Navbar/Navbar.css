@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 20px 170px;
+    margin: 10px 170px; /* Reduced top/bottom margin from 20px to 10px */
 }
 
 .nav-menu{
@@ -40,10 +40,10 @@
 }
 
 .nav-connect{
-    padding: 20px 40px;
+    padding: 15px 30px;  /* Reduced padding from 20px 40px */
     border-radius: 50px;
     background: linear-gradient(267deg,#DA7C25 0.36%, #B923E1 102.06%);
-    font-size: 22px;
+    font-size: 18px;     /* Reduced font size from 22px */
     cursor: pointer;
     transition: 0.5s;
 }
