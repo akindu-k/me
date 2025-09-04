@@ -149,6 +149,7 @@
     }
 }
 
+
 @media (max-width: 768px) {
     .hero-content {
         flex-direction: column;
@@ -161,6 +162,20 @@
     
     .hero-action {
         justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
+    
+    .hero-connect {
+        width: 80%;
+        text-align: center;
+    }
+
+    /* FIX: make Download CV responsive */
+    .hero-resume {
+        width: auto;
+        text-align: center;
     }
     
     .profile-image {
@@ -170,6 +185,10 @@
     
     .hero-text h1 {
         font-size: 42px;
+    }
+    
+    .social-icons {
+        justify-content: center;
     }
 }
 
@@ -202,8 +221,10 @@
         text-align: center;
         padding: 15px 20px;
     }
+
+    /* FIX: make Download CV full width on small screens */
     .hero-resume {
-        width: 100%;
+        width: auto;
         text-align: center;
         padding: 15px 20px;
     }
