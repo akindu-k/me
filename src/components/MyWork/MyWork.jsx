@@ -1,5 +1,6 @@
-import React from 'react'
+// import React from 'react'
 import './MyWork.css'
+import React, { useState } from 'react'
 // import theme_pattern from "../../assets/theme_pattern.svg"
 
 import project1_img from "../../assets/project_1.svg"
@@ -8,6 +9,9 @@ import project3_img from "../../assets/project_3.svg"
 import project4_img from "../../assets/project_4.svg"
 import project5_img from "../../assets/project_5.svg"
 import project6_img from "../../assets/project_6.svg"
+
+import { FaGithub, FaTimes } from 'react-icons/fa'; // Added FaTimes import
+
 
 
 const mywork_data = [
@@ -62,37 +66,99 @@ const mywork_data = [
 ];
 
 
+
+
 const MyWork = () => {
-  return (
-    <div id='work' className='mywork'>
-        <div className="mywork-title">
-            <h1>My latest work</h1>
-        </div>
-        <div className="mywork-container">
-            {mywork_data.map((work, index) => {
-                return (
-                    <div className="project-card" key={index}>
-                        <a href={work.w_github} target="_blank" rel="noopener noreferrer">
-                            <img src={work.w_img} alt={work.w_name} />
-                            <div className="project-info">
-                                <h3>{work.w_name}</h3>
-                                <p>{work.w_desc}</p>
-                                <div className="project-tags">
-                                    {work.w_tags.map((tag, tagIndex) => (
-                                        <span key={tagIndex} className="tag">{tag}</span>
-                                    ))}
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                )
-            })}
-        </div>
-        {/* <div className="mywork-showmore">
-            <p>Show More</p>
-        </div> */}
-    </div>
-  )
+    const [selectedProject, setSelectedProject] = useState(null);
+    
+    // Function to open the modal with project details
+    const openProjectModal = (project) => {
+        setSelectedProject(project);
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    };
+    
+    // Function to close the modal
+    const closeProjectModal = () => {
+        setSelectedProject(null);
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    };
+
+    return (
+      <div id='work' className='mywork'>
+          <div className="mywork-title">
+              <h1>My latest work</h1>
+          </div>
+          <div className="mywork-container">
+              {mywork_data.map((work, index) => {
+                  return (
+                      <div className="project-card" key={index} onClick={() => openProjectModal(work)}>
+                          <div className="project-card-inner">
+                              <div className="project-image-container">
+                                  <img src={work.w_img} alt={work.w_name} />
+                              </div>
+                              <div className="project-info">
+                                  <h3>{work.w_name}</h3>
+                                  <p>{work.w_desc}</p>
+                                  <div className="project-footer">
+                                      <div className="project-tags">
+                                          {work.w_tags.map((tag, tagIndex) => (
+                                              <span key={tagIndex} className="tag">{tag}</span>
+                                          ))}
+                                      </div>
+                                      <a 
+                                          href={work.w_github} 
+                                          target="_blank" 
+                                          rel="noopener noreferrer" 
+                                          className="github-link" 
+                                          title="View on GitHub"
+                                          onClick={(e) => {
+                                              e.stopPropagation();  // Prevent card click event
+                                              e.preventDefault();   // Prevent default link behavior
+                                              window.open(work.w_github, '_blank'); // Open in new tab
+                                          }}
+                                      >
+                                          <FaGithub />
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  )
+              })}
+          </div>
+          
+          {/* Project Modal */}
+          {selectedProject && (
+              <div className="project-modal-overlay" onClick={closeProjectModal}>
+                  <div className="project-modal" onClick={(e) => e.stopPropagation()}>
+                      <button className="modal-close-btn" onClick={closeProjectModal}>
+                          <FaTimes />
+                      </button>
+                      <div className="modal-image-container">
+                          <img src={selectedProject.w_img} alt={selectedProject.w_name} />
+                      </div>
+                      <div className="modal-content">
+                          <h2>{selectedProject.w_name}</h2>
+                          <p className="modal-description">{selectedProject.w_desc}</p>
+                          <div className="modal-tags">
+                              {selectedProject.w_tags.map((tag, index) => (
+                                  <span key={index} className="modal-tag">{tag}</span>
+                              ))}
+                          </div>
+                          <a 
+                              href={selectedProject.w_github} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="modal-github-link"
+                          >
+                              <FaGithub /> View on GitHub
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          )}
+      </div>
+    )
 }
 
 export default MyWork
