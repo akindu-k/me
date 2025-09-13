@@ -4,62 +4,55 @@ import "./Services.css"
 // import arrow_icon from "../../assets/arrow_icon.svg"
 
 
-const Services_Data = [
+const Blog_Data = [
   {
-    s_no: "01",
-    s_name: "Electrical  Design",
-    s_desc: "Comprehensive design of electrical systems for residential, commercial, and industrial applications with focus on efficiency and safety."
+    id: "01",
+    title: "Vision Transformers - From Pixels to Patches to Predictions ",
+    excerpt: "Vision Transformers split images into patches and process them like word tokens, using self-attention to capture global context beyond CNNs.",
+    date: "Sept 13, 2025",
+    url: "https://medium.com/@akinduk619/vision-transformers-from-pixels-to-patches-to-predictions-with-9f8b264536e7"
   },
   {
-    s_no: "02",
-    s_name: "Renewable  Solutions",
-    s_desc: "Design and implementation of solar, wind, and other renewable energy systems tailored to your specific needs and location."
-  },
-  {
-    s_no: "03",
-    s_name: "Energy  Consulting",
-    s_desc: "Assessment and recommendations to optimize energy usage and reduce costs across your facilities and operations."
-  },
-  {
-    s_no: "04",
-    s_name: "Electronic Design",
-    s_desc: "Comprehensive design of electrical systems for residential, commercial, and industrial applications with focus on efficiency and safety."
-  },
-  {
-    s_no: "05",
-    s_name: "Energy Solutions",
-    s_desc: "Design and implementation of solar, wind, and other renewable energy systems tailored to your specific needs and location."
-  },
-  {
-    s_no: "06",
-    s_name: "Consulting",
-    s_desc: "Assessment and recommendations to optimize energy usage and reduce costs across your facilities and operations."
+    id: "02",
+    title: "Interactive Hand Detection Using OpenCV and MediaPipe",
+    excerpt: "Real-time hand detection with OpenCV and MediaPipe, tracking 21 landmarks for gesture-based applications.",
+    date: "Dec 07, 2024",
+    url: "https://medium.com/@akinduk619/interactive-hand-detection-using-opencv-and-mediapipe-db0702dc0931"
   }
-];
+]
 
-const Services = () => {
+const BlogPosts = () => {
   return (
-    <div id='services' className='services'>
+    <div id='blog' className='services'>
       <div className='services-title'>
-        <h1>My Services</h1>
+        <h1>My Blog Posts</h1>
         {/* <img src={theme_pattern} alt="" /> */}
       </div>
 
       <div className='services-container'>
-        {Services_Data.map((service, index) => {
-          return <div key={index} className='services-format'>
-            <h3>{service.s_no}</h3>
-            <h2>{service.s_name}</h2>
-            <p>{service.s_desc}</p>
-            <div className='services-readmore'>
-              <p>Read More</p>
-              {/* <img src={arrow_icon} alt="" /> */}
-            </div>
-          </div>
+        {Blog_Data.map((post, index) => {
+          return (
+            <a 
+              href={post.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              key={index} 
+              className='services-format blog-post'
+            >
+              <h3>{post.id}</h3>
+              <h2>{post.title}</h2>
+              <p className="post-date">{post.date}</p>
+              <p>{post.excerpt}</p>
+              <div className='services-readmore'>
+                <p>Read on Medium</p>
+                {/* <img src={arrow_icon} alt="" /> */}
+              </div>
+            </a>
+          )
         })}
       </div>
     </div>
   )
 }
 
-export default Services
+export default BlogPosts
