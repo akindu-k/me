@@ -4,7 +4,7 @@ import profile_img from '../../assets/profile_img.jpeg'
 import resumePDF from '../../assets/Akindu_Kalhan.pdf' 
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 // Import React icons
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaMedium } from 'react-icons/fa';
 
 const TypewriterAnimation = ({ phrases }) => {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -76,6 +76,9 @@ const Hero = () => {
                     </a>
                     <a href="https://www.linkedin.com/in/akindu-kalhan/" target="_blank" rel="noopener noreferrer">
                         <FaLinkedinIn />
+                    </a>
+                    <a href="https://medium.com/@akinduk619" target="_blank" rel="noopener noreferrer">
+                        <FaMedium/>
                     </a>
                 </div>
                 
