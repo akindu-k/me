@@ -39,7 +39,7 @@
 .hero-text h2 {
     font-size: 32px; /* Increased font size */
     font-weight: 500;
-    color: var(--accent-color, #DF8908);
+    color: #ff00ff;
     margin: 0;
 }
 
@@ -53,7 +53,7 @@
 .typing-text {
     display: inline;
     font-weight: 700; /* Increased weight */
-    color: var(--accent-color, #DF8908);
+    color: #ff00ff;
 }
 
 .cursor {
@@ -77,13 +77,14 @@
 }
 
 .hero-connect {
-    padding: 18px 38px; /* Increased padding */
+    padding: 18px 38px;
     border-radius: 50px;
-    background: linear-gradient(264deg, #DF8908 -5.09%, #B415FF 106.28%);
-    font-size: 18px; /* Increased font size */
-    font-weight: 600; /* Increased weight */
+    background: #ff00ff;
+    font-size: 18px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 0, 255, 0.35);
 }
 
 .hero-resume {
@@ -97,13 +98,15 @@
 }
 
 .hero-connect:hover {
-    transform: translateY(-5px); /* Increased movement */
-    box-shadow: 0 15px 25px rgba(180, 21, 255, 0.25); /* Enhanced shadow */
+    transform: translateY(-5px);
+    background: #ff33ff;
+    box-shadow: 0 15px 30px rgba(255, 0, 255, 0.5);
 }
 
 .hero-resume:hover {
-    border-color: #B415FF;
-    transform: translateY(-5px); /* Increased movement */
+    border-color: #ff00ff;
+    color: #ff00ff;
+    transform: translateY(-5px);
 }
 
 /* Media queries for responsive design */
@@ -246,17 +249,18 @@
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--accent-color, #DF8908);
+    background-color: rgba(255, 0, 255, 0.1);
+    border: 1px solid rgba(255, 0, 255, 0.3);
+    color: #ff00ff;
     font-size: 22px;
     transition: all 0.3s ease;
 }
 
 .social-icons a:hover {
-    background-color: var(--accent-color, #DF8908);
-    color: #FFF;
+    background-color: #ff00ff;
+    color: #fff;
     transform: translateY(-3px);
-    box-shadow: 0 10px 15px rgba(223, 137, 8, 0.2);
+    box-shadow: 0 10px 20px rgba(255, 0, 255, 0.35);
 }
 
 /* Update media queries for responsive design */
