@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 657 435" width="657" height="435">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a0010"/>
+      <stop offset="100%" stop-color="#0a001a"/>
+    </linearGradient>
+  </defs>
+  <rect width="657" height="435" fill="url(#g)"/>
+  <rect x="40" y="70" width="577" height="295" rx="15" fill="none" stroke="#ff00ff" stroke-width="1.5" stroke-dasharray="8 4"/>
+  <rect x="178" y="110" width="300" height="200" rx="12" fill="rgba(255,0,255,0.1)" stroke="#ff00ff" stroke-width="1.5"/>
+  <text x="328" y="155" text-anchor="middle" fill="#ff00ff" font-size="20" font-family="Arial">✦ Happy Diwali ✦</text>
+  <line x1="198" y1="170" x2="458" y2="170" stroke="rgba(255,0,255,0.4)" stroke-width="1"/>
+  <text x="328" y="200" text-anchor="middle" fill="#ffffff" font-size="13" font-family="Arial">Wishing you joy &amp; prosperity</text>
+  <text x="328" y="225" text-anchor="middle" fill="#dddddd" font-size="12" font-family="Arial">— Akindu</text>
+  <rect x="218" y="255" width="220" height="30" rx="15" fill="rgba(255,0,255,0.3)" stroke="#ff00ff" stroke-width="1"/>
+  <text x="328" y="275" text-anchor="middle" fill="#ffffff" font-size="12" font-family="Arial">Download Card</text>
+  <text x="328" y="340" text-anchor="middle" fill="#ffffff" font-size="22" font-family="Arial" font-weight="700">Festival Card Creator</text>
+  <text x="328" y="372" text-anchor="middle" fill="#666" font-size="11" font-family="Arial">Replace with project screenshot</text>
+</svg>

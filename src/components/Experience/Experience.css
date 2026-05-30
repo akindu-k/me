@@ -1,0 +1,405 @@
+.experience {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    margin: 80px 170px;
+}
+
+.experience-title h1 {
+    font-size: 80px;
+    font-weight: 600;
+    padding: 0 30px;
+}
+
+/* Tabs */
+.experience-tabs {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.exp-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 30px;
+    border-radius: 40px;
+    border: 2px solid rgba(255, 0, 255, 0.3);
+    background: transparent;
+    color: #aaaaaa;
+    font-size: 16px;
+    font-family: "outfit";
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.exp-tab:hover {
+    border-color: #ff00ff;
+    color: #ffffff;
+}
+
+.exp-tab.active {
+    background: rgba(255, 0, 255, 0.2);
+    border-color: #ff00ff;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+}
+
+/* Professional Grid */
+.professional-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+.pro-card {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.pro-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent, #ff00ff);
+    border-radius: 16px 16px 0 0;
+}
+
+.pro-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    border-color: var(--accent, #ff00ff);
+}
+
+.pro-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.pro-role-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 0, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--accent, #ff00ff);
+    flex-shrink: 0;
+}
+
+.pro-role {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.pro-org {
+    font-size: 14px;
+    color: var(--accent, #ff00ff);
+    font-weight: 500;
+}
+
+.pro-desc {
+    font-size: 14px;
+    color: #aaaaaa;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.pro-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.pro-type, .pro-period, .pro-location {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #cccccc;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pro-duration {
+    font-size: 13px;
+    color: var(--accent, #ff00ff);
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* Academic Section */
+.academic-section {
+    width: 100%;
+    max-width: 700px;
+}
+
+.academic-card {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 36px;
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.05);
+}
+
+.academic-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.academic-icon {
+    font-size: 28px;
+    color: #ff00ff;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.academic-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.academic-uni {
+    font-size: 15px;
+    color: #ff00ff;
+    margin-bottom: 4px;
+}
+
+.academic-sub {
+    font-size: 13px;
+    color: #888888;
+}
+
+.academic-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 16px;
+    border-left: 2px solid rgba(255, 0, 255, 0.2);
+}
+
+.academic-role {
+    display: flex;
+    gap: 16px;
+    position: relative;
+}
+
+.academic-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff00ff;
+    flex-shrink: 0;
+    margin-top: 4px;
+    margin-left: -22px;
+    box-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+}
+
+.academic-role-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.academic-role-period {
+    font-size: 13px;
+    color: #aaaaaa;
+}
+
+.academic-role-location {
+    font-size: 12px;
+    color: #666666;
+    margin-top: 2px;
+}
+
+/* Involvement */
+.involvement-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.involvement-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.involvement-card.open {
+    border-color: rgba(255, 0, 255, 0.3);
+}
+
+.involvement-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: "outfit";
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.involvement-header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.involvement-org-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.involvement-org-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.involvement-total {
+    font-size: 12px;
+    color: #ff00ff;
+}
+
+.involvement-count {
+    font-size: 13px;
+    color: #888888;
+    white-space: nowrap;
+}
+
+.involvement-chevron {
+    color: #ff00ff;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.involvement-roles {
+    padding: 0 24px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.involvement-role {
+    padding-top: 16px;
+}
+
+.role-header {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.role-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 0, 255, 0.6);
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.role-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #eeeeee;
+    margin-bottom: 3px;
+}
+
+.role-period {
+    font-size: 12px;
+    color: #888888;
+    margin-bottom: 4px;
+}
+
+.role-desc {
+    font-size: 13px;
+    color: #aaaaaa;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .experience {
+        margin: 80px 80px;
+    }
+
+    .professional-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .experience {
+        margin: 50px 50px;
+        gap: 40px;
+    }
+
+    .experience-title h1 {
+        font-size: 50px;
+        padding: 0;
+    }
+
+    .professional-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exp-tab {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .experience {
+        margin: 50px 24px;
+    }
+
+    .experience-title h1 {
+        font-size: 40px;
+    }
+
+    .academic-card {
+        padding: 24px;
+    }
+
+    .involvement-header {
+        padding: 16px 18px;
+    }
+
+    .involvement-roles {
+        padding: 0 18px 16px 18px;
+    }
+}

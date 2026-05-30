@@ -9,6 +9,10 @@ import project3_img from "../../assets/project_3.svg"
 import project4_img from "../../assets/project_4.svg"
 import project5_img from "../../assets/project_5.svg"
 import project6_img from "../../assets/project_6.svg"
+import project_cutflow from "../../assets/project_cutflow.svg"
+import project_festival_card from "../../assets/project_festival_card.svg"
+import project_leo_rag from "../../assets/project_leo_rag.svg"
+import project_batch_voting from "../../assets/project_batch_voting.svg"
 
 import { FaGithub, FaTimes } from 'react-icons/fa'; // Added FaTimes import
 
@@ -62,6 +66,38 @@ const mywork_data = [
         w_img: project6_img,
         w_tags: ["AI Agents", "Automation", "Developer Tools"],
         w_github: "https://github.com/RavimalRanathunga/Team-Nova-Codebase-Genius"
+    },
+    {
+        w_no: 7,
+        w_name: "CutFlow",
+        w_desc: "A digital real-time Kanban board replacing physical whiteboards in garment factory cutting rooms. Features drag-and-drop across 8 production stages, Socket.IO live sync, priority classification with KPI dashboards, and dark/light theme support.",
+        w_img: project_cutflow,
+        w_tags: ["React", "Socket.IO", "Express.js", "Kanban"],
+        w_github: "https://github.com/akindu-k/CutFlow"
+    },
+    {
+        w_no: 8,
+        w_name: "Festival Card Creator",
+        w_desc: "A web application for generating and downloading custom festival greeting cards. Users can personalize cards for various occasions and share them instantly.",
+        w_img: project_festival_card,
+        w_tags: ["TypeScript", "React", "Vercel"],
+        w_github: "https://github.com/akindu-k/festival-card-creator"
+    },
+    {
+        w_no: 9,
+        w_name: "Leo RAG System",
+        w_desc: "A production-grade RAG chatbot that answers questions exclusively from uploaded documents with full citations and real-time token streaming. Built with FastAPI, Qdrant vector store, and OpenAI embeddings, featuring hybrid retrieval and per-user access control.",
+        w_img: project_leo_rag,
+        w_tags: ["FastAPI", "RAG", "OpenAI", "Qdrant"],
+        w_github: "https://github.com/akindu-k/leo-rag-system"
+    },
+    {
+        w_no: 10,
+        w_name: "Live Voting Dashboard",
+        w_desc: "A real-time voting results dashboard integrating Google Forms and Sheets with a React frontend. Features secure serverless architecture keeping credentials server-side, auto-refreshing charts, animated winner reveals with confetti, and configurable vote weighting.",
+        w_img: project_batch_voting,
+        w_tags: ["React", "Google Sheets API", "Vercel", "Chart.js"],
+        w_github: "https://github.com/akindu-k/batch-rep-voting"
     }
 ];
 
