@@ -65,7 +65,7 @@ const Contact = () => {
             <div className="container contact-section">
                 <div className="contact-left reveal">
                     <h2 className="subhead">Let's talk</h2>
-                    <p>I'm currently open to internship opportunities and projects. Feel free to reach out anytime to discuss ideas or potential collaborations, I'd love to contribute and learn!</p>
+                    <p>I'm always open to interesting projects and collaborations. Feel free to reach out anytime to discuss ideas, research, or something you're building, I'd love to hear from you!</p>
                     <ul className="contact-list">
                         <li>
                             <a className="contact-row" href={`mailto:${EMAIL}`}>
