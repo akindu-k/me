@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ScrollToTop.css';
 import { FiArrowUp } from 'react-icons/fi';
+import { smoothScrollTo } from '../../scroll';
 
 const ScrollToTop = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -22,12 +23,7 @@ const ScrollToTop = () => {
     };
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
+  const scrollToTop = () => smoothScrollTo(0);
 
   return (
     <button 

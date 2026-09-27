@@ -103,8 +103,10 @@
         display: block;
     }
 
+    /* Full-screen menu, as on apple.com: big links, a CTA at the bottom */
     .nav-mobile {
-        display: block;
+        display: flex;
+        flex-direction: column;
         position: fixed;
         top: var(--nav-height);
         left: 0;
@@ -112,12 +114,12 @@
         height: 0;
         overflow: hidden;
         /* Nested backdrop-filters don't compose, so the panel is opaque. */
-        background: var(--white);
+        background: #fafafc;
         transition: height 0.5s var(--ease);
     }
 
     .navbar--open {
-        background: var(--white);
+        background: #fafafc;
     }
 
     .navbar--open .nav-mobile {
@@ -126,25 +128,49 @@
 
     .nav-mobile ul {
         list-style: none;
-        padding: 20px 48px;
+        padding: 24px 48px;
+        overflow-y: auto;
     }
 
-    .nav-mobile a {
-        display: block;
-        padding: 6px 0;
-        font-size: 28px;
-        font-weight: 600;
-        letter-spacing: 0.007em;
-        color: var(--text);
+    .nav-mobile li a,
+    .nav-mobile-footer {
         opacity: 0;
         transform: translateY(-8px);
         transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), color 0.2s;
     }
 
-    .nav-mobile a:not(.active) { color: #333336; }
-    .nav-mobile a:hover { color: var(--blue); }
+    .nav-mobile li a {
+        display: block;
+        padding: 7px 0;
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 1.14;
+        letter-spacing: 0.007em;
+        color: var(--text);
+    }
 
-    .navbar--open .nav-mobile a {
+    .nav-mobile li a:hover,
+    .nav-mobile li a:active {
+        color: var(--text-secondary);
+    }
+
+    .nav-mobile-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-top: auto;
+        padding: 24px 48px calc(32px + env(safe-area-inset-bottom));
+        border-top: 1px solid var(--divider);
+    }
+
+    .nav-mobile-mail {
+        font-size: 14px;
+        color: var(--text-secondary);
+    }
+
+    .navbar--open .nav-mobile li a,
+    .navbar--open .nav-mobile-footer {
         opacity: 1;
         transform: none;
         transition-delay: calc(0.1s + var(--i) * 0.03s);
@@ -154,5 +180,14 @@
 @media (max-width: 734px) {
     .nav-mobile ul {
         padding: 16px 32px;
+    }
+
+    .nav-mobile-footer {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .nav-mobile-footer .btn {
+        align-self: stretch;
     }
 }
