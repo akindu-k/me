@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 const API = 'https://api.github.com'
-const CACHE_TTL = 60 * 60 * 1000 // 1 hour, keeps us well under the 60 req/hr anonymous limit
+const CACHE_TTL = 24 * 60 * 60 * 1000 // refresh at most once a day per visitor
 
 // Conventional-commit type → readable tag.
 const TYPE_LABELS = {
@@ -59,10 +59,13 @@ export const focusAreasFrom = (commits, limit = 3) => {
     .map(([scope]) => labelScope(scope))
 }
 
+// Returns { data, fresh } for the last saved result, or null if there is none.
 const readCache = (key) => {
   try {
     const cached = JSON.parse(localStorage.getItem(key))
-    if (cached && Date.now() - cached.savedAt < CACHE_TTL) return cached.data
+    if (cached && cached.data) {
+      return { data: cached.data, fresh: Date.now() - cached.savedAt < CACHE_TTL }
+    }
   } catch {
     // Storage unavailable or corrupt; fall through to a fresh fetch.
   }
@@ -87,13 +90,14 @@ const fetchJson = async (url) => {
 // (read from the pagination Link header of a one-per-page request).
 export const useGithubCommits = (repo, author, count = 8) => {
   const key = `gh-commits:${repo}:${author}:${count}`
-  const [state, setState] = useState(() => {
-    const cached = readCache(key)
-    return cached ? { status: 'ready', ...cached } : { status: 'loading' }
-  })
+  // Show whatever was saved last right away, even if it is more than a day old.
+  const [cached] = useState(() => readCache(key))
+  const [state, setState] = useState(() =>
+    cached ? { status: 'ready', ...cached.data } : { status: 'loading' }
+  )
 
   useEffect(() => {
-    if (state.status === 'ready') return
+    if (cached?.fresh) return
     let cancelled = false
 
     const load = async () => {
@@ -118,13 +122,14 @@ export const useGithubCommits = (repo, author, count = 8) => {
         writeCache(key, data)
         if (!cancelled) setState({ status: 'ready', ...data })
       } catch (error) {
-        if (!cancelled) setState({ status: 'error', error })
+        // Keep showing the older saved result if there is one.
+        if (!cancelled && !cached) setState({ status: 'error', error })
       }
     }
 
     load()
     return () => { cancelled = true }
-  }, [key, repo, author, count, state.status])
+  }, [key, repo, author, count, cached])
 
   return state
 }
