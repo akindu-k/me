@@ -1,6 +1,7 @@
 // import React from 'react'
 import './MyWork.css'
 import React, { useEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 // import theme_pattern from "../../assets/theme_pattern.svg"
 
 import project1_img from "../../assets/project_1.svg"
@@ -148,10 +149,12 @@ const projectLink = (work) =>
 
 
 
-// Bento layout: these tiles span two columns, chosen so every row of the 3-column grid is full.
-const wideTiles = new Set([0, 6, 11, 13])
-// Tiles shown before "Show all": three full rows of the desktop grid.
-const INITIAL_COUNT = 7
+// Tiles shown before "Show all".
+const INITIAL_COUNT = 4
+// Bento layout: these tiles span two columns, chosen so every row of the
+// 3-column grid is full (collapsed: 2 rows of 4 tiles; expanded: 6 rows).
+const WIDE_COLLAPSED = new Set([0, 3])
+const WIDE_EXPANDED = new Set([0, 6, 11, 13])
 
 const MyWork = () => {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -162,10 +165,18 @@ const MyWork = () => {
     // On the 2-column tablet grid the first tile spans both columns; the last
     // one does too when the tiles in between would otherwise leave a gap.
     const lastSpansTablet = (visible.length - 1) % 2 === 1;
+    const wideTiles = showAll ? WIDE_EXPANDED : WIDE_COLLAPSED;
 
-    const toggleShowAll = () => {
-        if (showAll) ref.current?.scrollIntoView({ behavior: 'smooth' });
-        setShowAll(!showAll);
+    // Collapsing removes a lot of height above the button; keep the button at
+    // the same spot on screen instead of scrolling the page to it.
+    const toggleShowAll = (e) => {
+        const button = e.currentTarget;
+        const before = button.getBoundingClientRect().top;
+        flushSync(() => setShowAll(!showAll));
+        if (showAll) {
+            const shift = button.getBoundingClientRect().top - before;
+            window.scrollTo({ top: window.scrollY + shift, behavior: 'instant' });
+        }
     };
 
     // Function to open the modal with project details

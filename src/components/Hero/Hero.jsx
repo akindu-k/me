@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "./Hero.css"
 import resumePDF from '../../assets/Akindu_Kalhan.pdf' 
 import heroPhoto from '../../assets/hero_speaking.jpeg'
-import AnchorLink from 'react-anchor-link-smooth-scroll';
+import ScrollLink from '../ScrollLink';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { RiMediumLine } from 'react-icons/ri';
 import { useParallax, useReveal } from '../../motion';
@@ -80,7 +80,7 @@ const Hero = () => {
                 <p className="hero-passion reveal" style={{ '--reveal-delay': '0.2s' }}>Passionate about <TypewriterAnimation phrases={typingPhrases} /></p>
 
                 <div className="hero-action reveal" style={{ '--reveal-delay': '0.3s' }}>
-                    <AnchorLink className='btn btn--primary' offset={48} href='#contact'>Connect With Me</AnchorLink>
+                    <ScrollLink className='btn btn--primary' to='contact'>Connect With Me</ScrollLink>
                     <button type="button" className="link-chevron" onClick={handleDownload}>Download CV</button>
                 </div>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./Navbar.css"
-import AnchorLink from 'react-anchor-link-smooth-scroll';
+import ScrollLink from '../ScrollLink';
 
 const links = [
   { id: "home", label: "Home" },
@@ -63,23 +63,33 @@ const Navbar = () => {
     return () => desktop.removeEventListener('change', onChange)
   }, [])
 
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
   const select = (id) => {
     setMenu(id)
     setOpen(false)
+    // Release the scroll lock now rather than after the re-render, so the
+    // eased scroll that follows this click can move the page.
+    document.body.style.overflow = ''
   }
 
   return (
     <header className={`navbar ${dark && !open ? 'navbar--dark' : ''} ${open ? 'navbar--open' : ''}`}>
       <nav className="nav-inner">
-        <AnchorLink className="nav-brand" offset={0} href="#home" onClick={() => select("home")}>Akindu Kalhan</AnchorLink>
+        <ScrollLink className="nav-brand" to="home" onClick={() => select("home")}>Akindu Kalhan</ScrollLink>
         <ul className="nav-menu">
           {links.map(({ id, label }) => (
             <li key={id}>
-              <AnchorLink className={`nav-link ${menu === id ? "active" : ""}`} offset={id === "home" ? 0 : 48} href={`#${id}`} onClick={() => select(id)}>{label}</AnchorLink>
+              <ScrollLink className={`nav-link ${menu === id ? "active" : ""}`} to={id} onClick={() => select(id)}>{label}</ScrollLink>
             </li>
           ))}
         </ul>
-        <AnchorLink className="btn btn--primary btn--small nav-connect" offset={48} href="#contact" onClick={() => select("contact")}>Connect With Me</AnchorLink>
+        <ScrollLink className="btn btn--primary btn--small nav-connect" to="contact" onClick={() => select("contact")}>Connect With Me</ScrollLink>
         <button
           className="nav-toggle"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -93,10 +103,14 @@ const Navbar = () => {
         <ul>
           {links.map(({ id, label }, i) => (
             <li key={id} style={{ '--i': i }}>
-              <AnchorLink className={menu === id ? "active" : ""} offset={id === "home" ? 0 : 48} href={`#${id}`} onClick={() => select(id)} tabIndex={open ? 0 : -1}>{label}</AnchorLink>
+              <ScrollLink className={menu === id ? "active" : ""} to={id} onClick={() => select(id)} tabIndex={open ? 0 : -1}>{label}</ScrollLink>
             </li>
           ))}
         </ul>
+        <div className="nav-mobile-footer" style={{ '--i': links.length }}>
+          <ScrollLink className="btn btn--primary" to="contact" onClick={() => select("contact")} tabIndex={open ? 0 : -1}>Connect With Me</ScrollLink>
+          <a className="nav-mobile-mail" href="mailto:akinduk619@gmail.com" tabIndex={open ? 0 : -1}>akinduk619@gmail.com</a>
+        </div>
       </div>
     </header>
   )

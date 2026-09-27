@@ -39,7 +39,7 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    /* Scrolling is animated in JS (src/scroll.js); CSS smooth scrolling would fight it. */
     -webkit-text-size-adjust: 100%;
 }
 
@@ -312,7 +312,6 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .parallax { transform: none !important; }
     *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./Contact.css"
-import { FiMail, FiPhone, FiMapPin, FiCheckCircle, FiAlertCircle } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMapPin, FiCheckCircle, FiAlertCircle, FiChevronRight } from 'react-icons/fi'
 import { useReveal } from '../../motion'
 
 const EMAIL = "akinduk619@gmail.com"
@@ -65,18 +65,29 @@ const Contact = () => {
             <div className="container contact-section">
                 <div className="contact-left reveal">
                     <h2 className="subhead">Let's talk</h2>
-                    <p>I'm currently open to internship opportunities and projects. Feel free to reach out anytime to discuss ideas or potential collaborations, I'd love to contribute and learn!</p>
-                    <div className="contact-details">
-                        <a className="contact-detail" href={`mailto:${EMAIL}`}>
-                            <span className="contact-icon"><FiMail /></span><p>{EMAIL}</p>
-                        </a>
-                        <a className="contact-detail" href="tel:+94707229859">
-                            <span className="contact-icon"><FiPhone /></span><p>+94-70-722-9859</p>
-                        </a>
-                        <div className="contact-detail">
-                            <span className="contact-icon"><FiMapPin /></span><p>Colombo, Sri Lanka</p>
-                        </div>
-                    </div>
+                    <p>I'm always open to interesting projects and collaborations. Feel free to reach out anytime to discuss ideas, research, or something you're building, I'd love to hear from you!</p>
+                    <ul className="contact-list">
+                        <li>
+                            <a className="contact-row" href={`mailto:${EMAIL}`}>
+                                <span className="contact-icon"><FiMail /></span>
+                                <span className="contact-row-text"><small>Email</small>{EMAIL}</span>
+                                <FiChevronRight className="contact-chevron" aria-hidden="true" />
+                            </a>
+                        </li>
+                        <li>
+                            <a className="contact-row" href="tel:+94707229859">
+                                <span className="contact-icon"><FiPhone /></span>
+                                <span className="contact-row-text"><small>Phone</small>+94-70-722-9859</span>
+                                <FiChevronRight className="contact-chevron" aria-hidden="true" />
+                            </a>
+                        </li>
+                        <li>
+                            <div className="contact-row">
+                                <span className="contact-icon"><FiMapPin /></span>
+                                <span className="contact-row-text"><small>Location</small>Colombo, Sri Lanka</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <form onSubmit={onSubmit} className="contact-right card reveal" style={{ '--reveal-delay': '0.1s' }}>
                     <label htmlFor="contact-name">Your Name</label>
@@ -84,7 +95,7 @@ const Contact = () => {
                     <label htmlFor="contact-email">Your Email</label>
                     <input id="contact-email" type="email" placeholder='Enter your email' name='email' autoComplete="email" required/>
                     <label htmlFor="contact-message">Write your message here</label>
-                    <textarea id="contact-message" name="message" rows="8" placeholder='Enter your message' required></textarea>
+                    <textarea id="contact-message" name="message" rows="6" placeholder='Enter your message' required></textarea>
                     <div className="contact-actions">
                         <button type="submit" className={`btn btn--primary contact-submit ${sending ? 'is-sending' : ''}`} disabled={sending}>
                             {sending ? <><span className="contact-spinner" aria-hidden="true" /> Sending…</> : 'Submit now'}

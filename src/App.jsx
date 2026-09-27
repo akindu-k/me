@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
@@ -10,9 +10,12 @@ import BlogPosts from './components/Services/Services' // Updated name but same 
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import { syncScrollWithUrl } from './scroll'
 
 
 const App = () => {
+  useEffect(() => syncScrollWithUrl(), [])
+
   return (
     <div>
       <Navbar/>
