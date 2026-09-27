@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Footer.css"
-import AnchorLink from 'react-anchor-link-smooth-scroll';
+import ScrollLink from '../ScrollLink';
 
 const columns = [
   {
@@ -48,7 +48,7 @@ const Footer = () => {
                                     ) : link.external ? (
                                         <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">{link.label}</a>
                                     ) : (
-                                        <AnchorLink offset={48} href={link.href}>{link.label}</AnchorLink>
+                                        <ScrollLink to={link.href.slice(1)}>{link.label}</ScrollLink>
                                     )}
                                 </li>
                             ))}
