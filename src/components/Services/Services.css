@@ -1,181 +1,86 @@
-.services{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 80px;
-    margin: 80px 170px;
-}
-
-.services-title{
-    position: relative;
-}
-
-.services-title h1{
-    padding: 0px 30px;
-    font-size: 80px;
-    font-weight: 600;
-}
-
-/* .services-title img{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-} */
-
-.services-format{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    padding: 60px;
-    border-radius: 16px;
-    background: #1a1a1a;
-    border: 1px solid rgba(255, 0, 255, 0.2);
-    transition: 0.4s;
-    cursor: pointer;
-}
-
-.services-container{
+.services-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 80px;
-}
-
-.services-format h3{
-    font-size: 28px;
-    font-weight: 600;
-    color: #ff00ff;
-}
-
-.services-format h2{
-    font-size: 38px;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.services-format p{
-    color: #d4d4d4;
-    font-size: 24px;
-    line-height: 40px;
-    max-width: 300px;
-}
-
-.services-readmore{
-    display: flex;
+    grid-template-columns: 3fr 2fr;
     gap: 20px;
-    align-items: center;
-    margin-top: 20px;
 }
 
-.services-format:hover{
-    border-color: #ff00ff;
-    background: #1e1e1e;
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(255, 0, 255, 0.2);
-    transition: 0.4s;
-}
-
-/* ...existing code... */
-
-/* Blog Post Specific Styling */
 .blog-post {
-    text-decoration: none;
-    color: inherit;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 40px !important; /* Reduce padding from 60px to 40px */
+    min-height: 420px;
+    padding: clamp(28px, 3.4vw, 44px);
 }
 
-.blog-post .post-date {
+.blog-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: auto;
+    padding-bottom: 48px;
+}
+
+.blog-top h3 {
     font-size: 14px;
-    color: #999;
-    margin-top: -10px;
-    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+}
+
+.blog-icon {
+    font-size: 24px;
+    color: var(--text-secondary);
 }
 
 .blog-post h2 {
-    min-height: 60px; /* Reduced from 80px */
-    font-size: 32px !important; /* Smaller font size */
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.14;
+    letter-spacing: 0.004em;
 }
 
-.blog-post h3 {
-    font-size: 24px !important; /* Smaller ID font size */
+.blog-post--feature h2 {
+    font-size: clamp(32px, 3.6vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -0.003em;
 }
 
-.blog-post p {
-    font-size: 20px !important; /* Smaller excerpt text */
-    line-height: 30px !important;
-    max-width: 100%;
+.post-date {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.post-excerpt {
+    margin-top: 14px;
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 560px;
 }
 
 .services-readmore {
-    margin-top: 10px; /* Reduced margin */
+    margin-top: 24px;
 }
 
-.services-readmore p {
-    font-weight: 600;
-    color: #ff00ff;
-    margin: 0;
-    font-size: 16px;
+.blog-post:hover .link-chevron {
+    text-decoration: underline;
 }
 
-/* ...existing media queries... */
-
-@media(max-width: 768px){
-    .services{
-        align-items: start;
-        gap: 70px;
-        margin: 20px 70px;
-    }
-
-    .services-title h1{
-        font-size: 50px;
-        padding: 0;
-    }
-    .services-format{
-        gap: 20px;
-        padding: 32px;
-    }
-
-    .services-format h2{
-        font-size: 28px;
-        min-height: 60px;
-    }
-
-    .services-format p{
-        font-size: 18px;
-        line-height: 32px;
-        max-width: 300px;
-    }
-
-    .services-container{
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-    }
-    
-    .blog-post .post-date {
-        font-size: 14px;
-    }
+.blog-post:hover .link-chevron::after {
+    transform: translateX(3px) rotate(45deg);
 }
 
-@media(max-width: 480px){
-    .services{
-        margin: 20px 30px;
-    }
-
-    .services-container{
+@media (max-width: 734px) {
+    .services-container {
         grid-template-columns: 1fr;
+        gap: 16px;
     }
 
-    .services-title h1{
-        font-size: 40px;
+    .blog-post {
+        min-height: 0;
     }
 
-    .blog-post h2 {
-        min-height: auto;
+    .blog-post h2,
+    .blog-post--feature h2 {
+        font-size: 28px;
     }
 }

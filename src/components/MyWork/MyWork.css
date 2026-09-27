@@ -1,518 +1,357 @@
-.mywork{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 80px;
-    margin: 80px 170px;
-}
-
-.mywork-title{
-    position: relative;
-}
-
-.mywork-title h1{
-    padding: 0px 30px;
-    font-size: 80px;
-    font-weight: 600;
-}
-
-.mywork-container{
+.mywork-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
-    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
-/* Project card styling */
 .project-card {
     position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s ease;
-    height: 460px; /* Increased height to accommodate both sections */
     display: flex;
     flex-direction: column;
-}
-
-.project-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-}
-
-.project-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.project-image-container {
-    height: 50%;
     overflow: hidden;
-    border-radius: 15px 15px 0 0;
+    cursor: pointer;
 }
 
-.project-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.project-card:hover img {
-    transform: scale(1.08);
+.project-card--wide {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .project-info {
-    height: 50%;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    color: white;
-    background: #121212;
-    border-radius: 0 0 15px 15px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    padding: 36px 32px 24px;
 }
 
-.project-info h3 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #ff00ff;
-}
-
-.project-info p {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 12px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    flex: 1;
+.project-card--wide .project-info {
+    flex: 0 0 44%;
+    justify-content: center;
+    padding: 44px 8px 44px 44px;
 }
 
 .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: auto;
-    margin-bottom: 12px;
+    gap: 6px;
+    margin-bottom: 14px;
 }
 
 .tag {
-    background: rgba(255, 0, 255, 0.2);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    border: 1px solid #ff00ff;
-    transition: all 0.3s ease;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
 }
 
-.tag:hover {
-    background: rgba(255, 0, 255, 0.5);
-    transform: translateY(-3px);
+.tag:not(:last-child)::after {
+    content: "·";
+    margin-left: 6px;
+}
+
+.project-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.17;
+    letter-spacing: 0.009em;
+    color: var(--text-on-dark);
+}
+
+.project-card--wide .project-info h3 {
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.1;
+}
+
+.project-info p {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-card--wide .project-info p {
+    -webkit-line-clamp: 5;
+    font-size: 17px;
 }
 
 .github-link {
-    display: inline-block;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 25px;
-    background: #ff00ff;
-    font-size: 14px;
-    font-weight: 500;
-    width: fit-content;
-    box-shadow: 0 4px 15px rgba(255, 0, 255, 0.4);
-    transition: all 0.3s ease;
-    margin-top: auto;
+    margin-top: 16px;
+    font-size: 15px;
 }
 
-.github-link:hover {
-    background: #ff33ff;
-    box-shadow: 0 6px 20px rgba(255, 0, 255, 0.6);
-    transform: translateY(-3px);
+/* Project artwork is 3:2; matching it avoids cropping text in the images. */
+.project-image-container {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    margin: auto 24px 0;
+    border-radius: 14px 14px 0 0;
+    overflow: hidden;
 }
 
-/* Keep existing showmore styling */
-.mywork-showmore{
-    display: flex;
-    gap: 15px;
-    border-radius: 50px;
-    border: 2px solid white;
-    padding: 30px 60px;
-    font-size: 22px;
-    font-weight: 500;
-    margin-bottom: 80px;
-    transition: 0.6s;
-    cursor: pointer;
+.project-card--wide .project-image-container {
+    flex: 1;
+    align-self: center;
+    margin: 44px 0 44px 32px;
+    border-radius: 14px 0 0 14px;
 }
 
-.mywork-showmore:hover{
-    gap: 30px;
-    transform: scale(1.10);
-    transition: 0.6s;
+.project-image-container img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
 }
 
-@media(max-width: 992px){
-    .project-card {
-        height: 420px;
-    }
-    
-    .project-info h3 {
-        font-size: 18px;
-        margin-bottom: 8px;
-    }
-
-    .project-info p {
-        font-size: 13px;
-        line-height: 1.4;
-        margin-bottom: 10px;
-    }
-
-    .tag {
-        font-size: 12px;
-        padding: 4px 10px;
-    }
-    
-    .github-link {
-        font-size: 12px;
-        padding: 5px 10px;
-    }
+.project-card:hover .project-image-container img {
+    transform: scale(1.04);
 }
 
-@media(max-width: 768px){
-    .mywork{
-        gap: 50px;
-        margin: 50px 70px;
-        align-items: start;
-    }
+/* Show all */
 
-    .mywork-title h1{
-        font-size: 50px;
-        padding: 0;
-        font-weight: 600;
-    }
-
-    .mywork-title img{
-        width: 130px;
-        margin-right: -20px;
-    }
-
-    .mywork-container{
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-    }
-
-    .project-card {
-        height: 380px;
-    }
-    
-    .project-info {
-        padding: 15px;
-    }
-
-    .project-info h3 {
-        font-size: 16px;
-        margin-bottom: 6px;
-    }
-
-    .project-info p {
-        font-size: 13px;
-        line-height: 1.3;
-        margin-bottom: 8px;
-        -webkit-line-clamp: 2;
-    }
-
-    .tag {
-        font-size: 11px;
-        padding: 4px 8px;
-    }
-
-    .github-link {
-        font-size: 11px;
-        padding: 4px 9px;
-    }
-
-    .mywork-showmore{
-        padding: 20px 40px;
-        font-size: 18px;
-        margin: 50px auto;
-        cursor: pointer;
-    }
-}
-
-@media(max-width: 576px){
-    .mywork{
-        margin: 50px 40px;
-    }
-    
-    .mywork-container{
-        grid-template-columns: 1fr;
-    }
-    
-    .project-card {
-        height: 360px;
-    }
-    
-    .project-info h3 {
-        font-size: 15px;
-        margin-bottom: 5px;
-    }
-
-    .project-info p {
-        font-size: 12px;
-        line-height: 1.2;
-        -webkit-line-clamp: 2;
-    }
-
-    .tag {
-        font-size: 10px;
-        padding: 3px 8px;
-    }
-    
-    .github-link {
-        font-size: 10px;
-        padding: 4px 8px;
-    }
-}
-
-/* Add these styles at the end of your existing CSS */
-
-/* Make project cards clickable with a pointer cursor */
-.project-card {
-    cursor: pointer;
-}
-
-/* Project Modal Styles */
-.project-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+.mywork-more {
     display: flex;
     justify-content: center;
+    margin-top: 40px;
+}
+
+.mywork-more-btn {
+    display: inline-flex;
     align-items: center;
-    z-index: 1000;
-    padding: 20px;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 980px;
+    font-size: 17px;
+    color: var(--text-on-dark);
+    border: 1px solid var(--divider-dark);
+    transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.mywork-more-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--text-secondary);
+}
+
+/* Modal */
+
+.project-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.48);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: modal-fade 0.35s var(--ease);
 }
 
 .project-modal {
-    background-color: #121212;
-    width: 80%;
-    max-width: 1000px;
-    max-height: 90vh;
-    border-radius: 15px;
-    overflow-y: auto;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    animation: modalFadeIn 0.3s ease;
+    width: 100%;
+    max-width: 880px;
+    max-height: calc(100vh - 48px);
+    max-height: calc(100dvh - 48px);
+    overflow-y: auto;
+    border-radius: 28px;
+    background: var(--white);
+    color: var(--text);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    animation: modal-in 0.5s var(--ease);
+    outline: none;
 }
 
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes modal-fade {
+    from { opacity: 0; }
+}
+
+@keyframes modal-in {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); }
 }
 
 .modal-close-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(255, 0, 255, 0.8);
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
+    top: 18px;
+    right: 18px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
     font-size: 20px;
-    z-index: 10;
-    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--near-black);
+    transition: background-color 0.3s var(--ease);
 }
 
 .modal-close-btn:hover {
-    background: #ff00ff;
-    transform: rotate(90deg);
-}
-
-.modal-image-container {
-    width: 100%;
-    height: 450px; /* Increased from 300px to 450px */
-    overflow: hidden;
-    border-radius: 15px 15px 0 0;
-}
-
-.modal-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease; /* Add a subtle zoom effect */
-}
-
-.project-modal:hover .modal-image-container img {
-    transform: scale(1.02);
+    background: rgba(0, 0, 0, 0.14);
 }
 
 .modal-content {
-    padding: 30px;
-    color: white;
-}
-
-.modal-content h2 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #ff00ff;
-}
-
-.modal-description {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    /* No line clamp here, show full description */
+    padding: clamp(40px, 6vw, 64px) clamp(24px, 6vw, 64px) 32px;
 }
 
 .modal-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 25px;
+    gap: 8px;
+    padding-right: 40px;
+    margin-bottom: 16px;
 }
 
 .modal-tag {
-    background: rgba(255, 0, 255, 0.2);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 15px;
-    border: 1px solid #ff00ff;
+    padding: 4px 11px;
+    border-radius: 980px;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--gray-bg);
+}
+
+.modal-content h2 {
+    font-size: clamp(32px, 4.4vw, 48px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.003em;
+    padding-right: 32px;
+}
+
+.modal-description {
+    margin-top: 18px;
+    font-size: clamp(17px, 1.6vw, 19px);
+    line-height: 1.47;
+    color: var(--text-secondary);
 }
 
 .modal-github-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: #fff;
-    text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 25px;
-    background: #ff00ff;
-    font-size: 16px;
-    font-weight: 500;
-    box-shadow: 0 4px 15px rgba(255, 0, 255, 0.4);
-    transition: all 0.3s ease;
+    margin-top: 28px;
 }
 
-.modal-github-link:hover {
-    background: #ff33ff;
-    box-shadow: 0 6px 20px rgba(255, 0, 255, 0.6);
-    transform: translateY(-3px);
+.modal-image-container {
+    margin: 0 clamp(24px, 6vw, 64px) clamp(24px, 6vw, 64px);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--gray-bg);
 }
 
-/* Media queries for the modal */
-@media(max-width: 768px) {
+.modal-image-container img {
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+}
+
+@media (max-width: 1068px) {
+    .mywork-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Reset the desktop wide tiles, then widen the first and last tile so
+       the two-column grid stays full. */
+    .project-card--wide {
+        grid-column: auto;
+        flex-direction: column;
+    }
+
+    .project-card--wide .project-info {
+        flex: 0 0 auto;
+        justify-content: flex-start;
+        padding: 36px 32px 24px;
+    }
+
+    .project-card--wide .project-image-container {
+        align-self: stretch;
+        margin: auto 24px 0;
+        border-radius: 14px 14px 0 0;
+    }
+
+    .project-card--wide .project-info h3 {
+        font-size: 24px;
+    }
+
+    .project-card--wide .project-info p {
+        -webkit-line-clamp: 3;
+        font-size: 15px;
+    }
+
+    .project-card:first-child,
+    .project-card--tablet-wide {
+        grid-column: span 2;
+        flex-direction: row;
+    }
+
+    .project-card:first-child .project-info,
+    .project-card--tablet-wide .project-info {
+        flex: 0 0 46%;
+        justify-content: center;
+        padding: 40px 8px 40px 40px;
+    }
+
+    .project-card:first-child .project-image-container,
+    .project-card--tablet-wide .project-image-container {
+        margin: 40px 0 40px 28px;
+        border-radius: 14px 0 0 14px;
+    }
+
+    .project-card:first-child .project-info h3,
+    .project-card--tablet-wide .project-info h3 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 734px) {
+    .mywork-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .project-card,
+    .project-card:first-child,
+    .project-card--tablet-wide {
+        grid-column: auto;
+        flex-direction: column;
+    }
+
+    .project-card .project-info,
+    .project-card:first-child .project-info,
+    .project-card--tablet-wide .project-info {
+        flex: 0 0 auto;
+        padding: 30px 26px 20px;
+    }
+
+    .project-card .project-image-container,
+    .project-card:first-child .project-image-container,
+    .project-card--tablet-wide .project-image-container {
+        align-self: stretch;
+        margin: auto 20px 0;
+        border-radius: 14px 14px 0 0;
+    }
+
+    .project-card .project-info h3,
+    .project-card:first-child .project-info h3,
+    .project-card--tablet-wide .project-info h3 {
+        font-size: 24px;
+    }
+
+    .project-card--wide .project-info p {
+        -webkit-line-clamp: 3;
+        font-size: 15px;
+    }
+
+    .project-modal-overlay {
+        padding: 12px;
+        align-items: flex-end;
+    }
+
     .project-modal {
-        width: 90%;
-    }
-    
-    .modal-image-container {
-        height: 200px;
-    }
-    
-    .modal-content h2 {
-        font-size: 22px;
-    }
-    
-    .modal-description {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-    
-    .modal-tag {
-        font-size: 13px;
-        padding: 6px 12px;
-    }
-    
-    .modal-github-link {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-}
-
-@media(max-width: 576px) {
-    .project-modal {
-        width: 95%;
-    }
-    
-    .modal-content {
-        padding: 20px;
-    }
-    
-    .modal-content h2 {
-        font-size: 20px;
-        margin-bottom: 15px;
-    }
-    
-    .modal-description {
-        font-size: 13px;
-        margin-bottom: 20px;
-    }
-    
-    .modal-tag {
-        font-size: 12px;
-        padding: 5px 10px;
-    }
-}
-
-/* Adjust the height for different screen sizes */
-@media(max-width: 992px) {
-    .modal-image-container {
-        height: 400px;
-    }
-}
-
-@media(max-width: 768px) {
-    .modal-image-container {
-        height: 300px;
-    }
-}
-
-@media(max-width: 576px) {
-    .modal-image-container {
-        height: 250px;
+        border-radius: 24px;
+        max-height: calc(100dvh - 24px);
     }
 }
