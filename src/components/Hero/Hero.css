@@ -1,271 +1,124 @@
 .hero {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 0 120px 0; /* Reduced top padding from 80px to 40px */
-    min-height: 90vh;
-    /* background-color: var(--bg-color, #121629); */
-}
-
-.hero-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 70px; /* Increased gap */
-    width: 95%; /* Increased width */
-    max-width: 1400px; /* Increased max-width */
-}
-
-.profile-image {
-    width: 380px; /* Increased size */
-    height: 380px; /* Increased size */
-    border-radius: 50%;
-    object-fit: cover;
-    border: 6px solid rgba(255, 255, 255, 0.1); /* Thicker border */
+    padding-top: calc(var(--nav-height) + clamp(56px, 9vw, 110px));
+    padding-bottom: 0;
+    text-align: center;
 }
 
 .hero-text {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Increased gap */
+    align-items: center;
 }
 
-.hero-text h1 {
-    font-size: 64px; /* Increased font size */
-    font-weight: 700;
-    margin: 0;
+.hero-subhead {
+    max-width: 680px;
+    margin-top: 18px;
+    color: var(--text-on-dark);
 }
 
-.hero-text h2 {
-    font-size: 32px; /* Increased font size */
-    font-weight: 500;
-    color: #ff00ff;
-    margin: 0;
-}
-
-.hero-text p {
-    font-size: 22px; /* Increased font size */
-    line-height: 1.6;
-    margin-bottom: 25px; /* Increased margin */
-    max-width: 700px; /* Increased max-width */
+.hero-passion {
+    margin-top: 14px;
+    font-size: clamp(19px, 2vw, 21px);
+    color: var(--text-secondary);
+    min-height: 1.5em;
 }
 
 .typing-text {
-    display: inline;
-    font-weight: 700; /* Increased weight */
-    color: #ff00ff;
+    color: var(--text-on-dark);
+    font-weight: 500;
 }
 
 .cursor {
     display: inline-block;
-    margin-left: 3px; /* Slightly increased */
-    width: 3px; /* Slightly increased */
-    animation: blink 1s step-start infinite;
+    margin-left: 1px;
+    color: var(--link-on-dark);
+    font-weight: 300;
+    animation: hero-blink 1s steps(1) infinite;
 }
 
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
+@keyframes hero-blink {
+    50% { opacity: 0; }
 }
 
 .hero-action {
     display: flex;
     align-items: center;
-    gap: 35px; /* Increased gap */
-    margin-top: 30px; /* Increased margin */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px 32px;
+    margin-top: 36px;
 }
-
-.hero-connect {
-    padding: 18px 38px;
-    border-radius: 50px;
-    background: #ff00ff;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(255, 0, 255, 0.35);
-}
-
-.hero-resume {
-    padding: 18px 38px; /* Increased padding */
-    border-radius: 50px;
-    border: 3px solid #FFF; /* Thicker border */
-    font-size: 18px; /* Increased font size */
-    font-weight: 600; /* Increased weight */
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.hero-connect:hover {
-    transform: translateY(-5px);
-    background: #ff33ff;
-    box-shadow: 0 15px 30px rgba(255, 0, 255, 0.5);
-}
-
-.hero-resume:hover {
-    border-color: #ff00ff;
-    color: #ff00ff;
-    transform: translateY(-5px);
-}
-
-/* Media queries for responsive design */
-@media (max-width: 1200px) {
-    .hero-content {
-        gap: 40px;
-    }
-    
-    .profile-image {
-        width: 320px;
-        height: 320px;
-    }
-    
-    .hero-text h1 {
-        font-size: 54px;
-    }
-    
-    .hero-text h2 {
-        font-size: 28px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .hero-content {
-        gap: 30px;
-    }
-    
-    .profile-image {
-        width: 280px;
-        height: 280px;
-    }
-    
-    .hero-text h1 {
-        font-size: 48px;
-    }
-    
-    .hero-text h2 {
-        font-size: 26px;
-    }
-    
-    .hero-text p {
-        font-size: 20px;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .hero-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .hero-text {
-        align-items: center;
-    }
-    
-    .hero-action {
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
-        gap: 20px;
-    }
-    
-    .hero-connect {
-        width: 80%;
-        text-align: center;
-    }
-
-    /* FIX: make Download CV responsive */
-    .hero-resume {
-        width: auto;
-        text-align: center;
-    }
-    
-    .profile-image {
-        width: 250px;
-        height: 250px;
-    }
-    
-    .hero-text h1 {
-        font-size: 42px;
-    }
-    
-    .social-icons {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .profile-image {
-        width: 220px;
-        height: 220px;
-    }
-    
-    .hero-text h1 {
-        font-size: 36px;
-    }
-    
-    .hero-text h2 {
-        font-size: 22px;
-    }
-    
-    .hero-text p {
-        font-size: 18px;
-    }
-    
-    .hero-action {
-        flex-direction: column;
-        width: 100%;
-        gap: 20px;
-    }
-    
-    .hero-connect {
-        width: 100%;
-        text-align: center;
-        padding: 15px 20px;
-    }
-
-    /* FIX: make Download CV full width on small screens */
-    .hero-resume {
-        width: auto;
-        text-align: center;
-        padding: 15px 20px;
-    }
-}
-
-/* Add this to your existing Hero.css file */
 
 .social-icons {
     display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 10px;
+    gap: 12px;
+    margin-top: 28px;
 }
 
 .social-icons a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: rgba(255, 0, 255, 0.1);
-    border: 1px solid rgba(255, 0, 255, 0.3);
-    color: #ff00ff;
-    font-size: 22px;
-    transition: all 0.3s ease;
+    font-size: 18px;
+    color: var(--text-secondary);
+    border: 1px solid var(--divider-dark);
+    transition: color 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
 .social-icons a:hover {
-    background-color: #ff00ff;
-    color: #fff;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(255, 0, 255, 0.35);
+    color: var(--text-on-dark);
+    border-color: var(--text-secondary);
+    transform: translateY(-2px);
 }
 
-/* Update media queries for responsive design */
-@media (max-width: 768px) {
-    .social-icons {
-        justify-content: center;
-    }
+/* Product-style visual */
+
+.hero-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(56px, 8vw, 96px);
+    padding-bottom: clamp(88px, 12vw, 160px);
+}
+
+.hero-glow {
+    position: absolute;
+    left: 50%;
+    top: 12%;
+    width: min(1100px, 140vw);
+    aspect-ratio: 1.6;
+    transform: translateX(-50%);
+    background:
+        radial-gradient(closest-side, rgba(0, 113, 227, 0.32), transparent 70%),
+        radial-gradient(closest-side at 65% 60%, rgba(120, 90, 255, 0.18), transparent 70%);
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+.hero-visual {
+    position: relative;
+    width: min(440px, 78vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 10px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.02) 55%);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.hero-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #111;
+}
+
+/* The source photo has its own white frame; zoom past it. */
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.3);
 }

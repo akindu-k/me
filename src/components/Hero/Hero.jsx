@@ -3,8 +3,9 @@ import "./Hero.css"
 import profile_img from '../../assets/profile_img.jpeg'
 import resumePDF from '../../assets/Akindu_Kalhan.pdf' 
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-// Import React icons
-import { FaGithub, FaLinkedinIn, FaMedium } from 'react-icons/fa';
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
+import { RiMediumLine } from 'react-icons/ri';
+import { useParallax, useReveal } from '../../motion';
 
 const TypewriterAnimation = ({ phrases }) => {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -61,36 +62,43 @@ const Hero = () => {
     document.body.removeChild(link);
   };
 
+  const revealRef = useReveal();
+  const visualRef = useParallax(0.12);
+
   return (
-    <div id='home' className='hero'>
-        <div className="hero-content">
-            <img src={profile_img} alt="Akindu Kalhan" className="profile-image" />
-            <div className="hero-text">
-                <h1>Hi, I'm Akindu Kalhan</h1>
-                <h2>Electrical Engineering Undergraduate at University of Moratuwa</h2>
-                <p>Passionate about <TypewriterAnimation phrases={typingPhrases} /></p>
-                
-                <div className="social-icons">
-                    <a href="https://github.com/akindu-k" target="_blank" rel="noopener noreferrer">
-                        <FaGithub />
-                    </a>
-                    <a href="https://www.linkedin.com/in/akindu-kalhan/" target="_blank" rel="noopener noreferrer">
-                        <FaLinkedinIn />
-                    </a>
-                    <a href="https://medium.com/@akinduk619" target="_blank" rel="noopener noreferrer">
-                        <FaMedium/>
-                    </a>
-                </div>
-                
-                <div className="hero-action">
-                    <AnchorLink className='anchor-link' offset={50} href='#contact'>
-                        <div className="hero-connect">Connect With Me</div>
-                    </AnchorLink>
-                    <div className="hero-resume" onClick={handleDownload}>Download CV</div>
+    <section id='home' className='hero section section--dark' ref={revealRef}>
+        <div className="container hero-text">
+            <h1 className="headline headline--xl reveal">Hi, I'm Akindu Kalhan</h1>
+            <h2 className="subhead hero-subhead reveal" style={{ '--reveal-delay': '0.1s' }}>Electrical Engineering Undergraduate at University of Moratuwa</h2>
+            <p className="hero-passion reveal" style={{ '--reveal-delay': '0.2s' }}>Passionate about <TypewriterAnimation phrases={typingPhrases} /></p>
+
+            <div className="hero-action reveal" style={{ '--reveal-delay': '0.3s' }}>
+                <AnchorLink className='btn btn--primary' offset={48} href='#contact'>Connect With Me</AnchorLink>
+                <button type="button" className="link-chevron" onClick={handleDownload}>Download CV</button>
+            </div>
+
+            <div className="social-icons reveal" style={{ '--reveal-delay': '0.4s' }}>
+                <a href="https://github.com/akindu-k" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <FiGithub />
+                </a>
+                <a href="https://www.linkedin.com/in/akindu-kalhan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <FiLinkedin />
+                </a>
+                <a href="https://medium.com/@akinduk619" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+                    <RiMediumLine />
+                </a>
+            </div>
+        </div>
+
+        <div className="hero-stage reveal" style={{ '--reveal-delay': '0.35s' }}>
+            <div className="hero-glow" aria-hidden="true" />
+            <div className="hero-visual parallax" ref={visualRef}>
+                <div className="hero-photo">
+                    <img src={profile_img} alt="Akindu Kalhan" className="profile-image" />
                 </div>
             </div>
         </div>
-    </div>
+    </section>
   )
 }
 
