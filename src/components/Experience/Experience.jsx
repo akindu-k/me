@@ -43,6 +43,13 @@ const professional = [
     }
 ]
 
+const PRO_FIELDS = [
+    ['Type', 'type'],
+    ['Period', 'period'],
+    ['Duration', 'duration'],
+    ['Location', 'location'],
+]
+
 const education = [
     {
         school: "University of Moratuwa",
@@ -241,6 +248,7 @@ const Experience = () => {
             </div>
 
             {activeTab === 'professional' && (
+                <>
                 <div className="container compare-wrap">
                     <div className="compare" role="table" aria-label="Professional experience" style={{ '--cols': professional.length }}>
                         <div className="compare-row compare-row--head" role="row">
@@ -253,12 +261,7 @@ const Experience = () => {
                                 </div>
                             ))}
                         </div>
-                        {[
-                            ['Type', 'type'],
-                            ['Period', 'period'],
-                            ['Duration', 'duration'],
-                            ['Location', 'location'],
-                        ].map(([label, key]) => (
+                        {PRO_FIELDS.map(([label, key]) => (
                             <div className="compare-row reveal" role="row" key={key}>
                                 {professional.map((item, i) => (
                                     <div className="compare-cell" role="cell" key={i}>
@@ -270,6 +273,29 @@ const Experience = () => {
                         ))}
                     </div>
                 </div>
+
+                {/* Below desktop width the table becomes a row of swipeable cards */}
+                <div className="pro-cards reveal">
+                    <Scroller label="Professional experience">
+                        {professional.map((item) => (
+                            <article className="pro-card card" key={`${item.role}-${item.org}`}>
+                                <span className="compare-icon"><FiBriefcase /></span>
+                                <h3 className="pro-role">{item.role}</h3>
+                                <p className="pro-org">{item.org}</p>
+                                <p className="pro-desc">{item.desc}</p>
+                                <dl className="pro-facts">
+                                    {PRO_FIELDS.map(([label, key]) => (
+                                        <div key={key}>
+                                            <dt>{label}</dt>
+                                            <dd className={item[key] ? '' : 'compare-value--empty'}>{item[key] || '—'}</dd>
+                                        </div>
+                                    ))}
+                                </dl>
+                            </article>
+                        ))}
+                    </Scroller>
+                </div>
+                </>
             )}
 
             {activeTab === 'education' && (
