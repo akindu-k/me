@@ -46,10 +46,41 @@ export const smoothScrollTo = (targetY) => {
   frame = requestAnimationFrame(step)
 }
 
-// Scroll so the element with `id` sits just below the fixed nav bar.
-export const scrollToId = (id, offset = 48) => {
+const targetTop = (id, offset) => {
   const el = document.getElementById(id)
-  if (!el) return
-  const top = id === 'home' ? 0 : el.getBoundingClientRect().top + window.scrollY - offset
-  smoothScrollTo(top)
+  if (!el) return null
+  return id === 'home' ? 0 : el.getBoundingClientRect().top + window.scrollY - offset
+}
+
+// Scroll so the element with `id` sits just below the fixed nav bar.
+export const scrollToId = (id, offset = 48, { instant = false } = {}) => {
+  const top = targetTop(id, offset)
+  if (top === null) return
+  if (instant) window.scrollTo({ top, behavior: 'instant' })
+  else smoothScrollTo(top)
+}
+
+// Record the section in the URL so it can be shared, bookmarked and reached
+// with back/forward. Home clears the fragment.
+export const pushSectionUrl = (id) => {
+  const url = id === 'home'
+    ? window.location.pathname + window.location.search
+    : `#${id}`
+  const current = window.location.hash.slice(1) || 'home'
+  if (current !== id) window.history.pushState(null, '', url)
+}
+
+// Back/forward between sections, and arriving on a #section link. Returns a cleanup function.
+export const syncScrollWithUrl = () => {
+  const sectionFromUrl = () => decodeURIComponent(window.location.hash.slice(1)) || 'home'
+
+  // Sections render after load, so the browser's own jump to the fragment
+  // can miss; place the page once they exist.
+  if (window.location.hash) {
+    requestAnimationFrame(() => scrollToId(sectionFromUrl(), 48, { instant: true }))
+  }
+
+  const onPopState = () => scrollToId(sectionFromUrl())
+  window.addEventListener('popstate', onPopState)
+  return () => window.removeEventListener('popstate', onPopState)
 }
