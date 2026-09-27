@@ -56,7 +56,7 @@ const Footer = () => {
                 ))}
             </div>
             <div className="footer-bottom">
-                <p className="footer-bottom-left">© 2025 Akindu Kalhan. All rights reserved.</p>
+                <p className="footer-bottom-left">© 2026 Akindu Kalhan. All rights reserved.</p>
             </div>
         </div>
     </footer>

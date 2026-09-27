@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import "./Hero.css"
-import profile_img from '../../assets/profile_img.jpeg'
 import resumePDF from '../../assets/Akindu_Kalhan.pdf' 
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { RiMediumLine } from 'react-icons/ri';
 import { useParallax, useReveal } from '../../motion';
+import HeroBackground from './HeroBackground';
 
 const TypewriterAnimation = ({ phrases }) => {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -63,11 +63,12 @@ const Hero = () => {
   };
 
   const revealRef = useReveal();
-  const visualRef = useParallax(0.12);
+  const textRef = useParallax(0.2);
 
   return (
     <section id='home' className='hero section section--dark' ref={revealRef}>
-        <div className="container hero-text">
+        <HeroBackground />
+        <div className="container hero-text parallax" ref={textRef}>
             <h1 className="headline headline--xl reveal">Hi, I'm Akindu Kalhan</h1>
             <h2 className="subhead hero-subhead reveal" style={{ '--reveal-delay': '0.1s' }}>Electrical Engineering Undergraduate at University of Moratuwa</h2>
             <p className="hero-passion reveal" style={{ '--reveal-delay': '0.2s' }}>Passionate about <TypewriterAnimation phrases={typingPhrases} /></p>
@@ -90,14 +91,6 @@ const Hero = () => {
             </div>
         </div>
 
-        <div className="hero-stage reveal" style={{ '--reveal-delay': '0.35s' }}>
-            <div className="hero-glow" aria-hidden="true" />
-            <div className="hero-visual parallax" ref={visualRef}>
-                <div className="hero-photo">
-                    <img src={profile_img} alt="Akindu Kalhan" className="profile-image" />
-                </div>
-            </div>
-        </div>
     </section>
   )
 }
