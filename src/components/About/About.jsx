@@ -32,8 +32,8 @@ const About = () => {
             <div className="about-bento">
                 <div className="about-tile about-intro card reveal">
                     <img src={profile_img} alt='Profile' className="about-icon"/>
-                    <p className="about-lead">I am Akindu Kalhan, an Associate Software Engineer at Jaseci Labs and an Electrical Engineering undergraduate at the University of Moratuwa, with a strong passion for AI, computer vision, robotics, and embedded systems. I enjoy applying my technical skills to develop innovative solutions that bridge hardware and software, from intelligent electrical systems to autonomous robots.</p>
-                    <p className="about-body">Beyond academics, I have hands-on experience in interdisciplinary projects, research, and leadership roles in clubs and volunteering initiatives. I am eager to contribute to challenging projects in cutting-edge technology fields and continuously learn to push the boundaries of what intelligent systems can achieve.</p>
+                    <p className="about-lead">I build intelligent systems that bridge hardware and software.</p>
+                    <p className="about-body">Associate Software Engineer at <strong>Jaseci Labs</strong>. Electrical Engineering undergraduate at the <strong>University of Moratuwa</strong>. I work across <strong>AI, computer vision, robotics and embedded systems</strong>, and lead teams through clubs and volunteering along the way.</p>
                 </div>
 
                 {achievements.map((item, i) => (
