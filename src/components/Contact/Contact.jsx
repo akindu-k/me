@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import "./Contact.css"
-import mail_icon from "../../assets/mail_icon.svg"
-import location_icon from "../../assets/location_icon.svg"
-import call_icon from "../../assets/call_icon.svg"
+import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
+import { useReveal } from '../../motion'
 
 const Contact = () => {
     const [formStatus, setFormStatus] = useState({
@@ -11,6 +10,8 @@ const Contact = () => {
         message: ''
     });
     
+    const ref = useReveal();
+
     const onSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -62,44 +63,44 @@ const Contact = () => {
     };
     
     return (
-        <div id='contact' className='contact'>
-            <div className="contact-title">
-                <h1>Get in touch</h1>
+        <section id='contact' className='contact section section--white' ref={ref}>
+            <div className="container section-header">
+                <h1 className="headline reveal">Get in touch</h1>
             </div>
-            <div className="contact-section">
-                <div className="contact-left">
-                    <h1>Let's talk</h1>
+            <div className="container contact-section">
+                <div className="contact-left reveal">
+                    <h2 className="subhead">Let's talk</h2>
                     <p>I'm currently open to internship opportunities and projects. Feel free to reach out anytime to discuss ideas or potential collaborations, I'd love to contribute and learn!</p>
                     <div className="contact-details">
+                        <a className="contact-detail" href="mailto:akinduk619@gmail.com">
+                            <span className="contact-icon"><FiMail /></span><p>akinduk619@gmail.com</p>
+                        </a>
+                        <a className="contact-detail" href="tel:+94707229859">
+                            <span className="contact-icon"><FiPhone /></span><p>+94-70-722-9859</p>
+                        </a>
                         <div className="contact-detail">
-                            <img src={mail_icon} alt="" /><p>akinduk619@gmail.com</p>
-                        </div>
-                        <div className="contact-detail">
-                            <img src={call_icon} alt="" /><p>+94-70-722-9859</p>
-                        </div>
-                        <div className="contact-detail">
-                            <img src={location_icon} alt="" /><p>Colombo, Sri Lanka</p>
+                            <span className="contact-icon"><FiMapPin /></span><p>Colombo, Sri Lanka</p>
                         </div>
                     </div>
                 </div>
-                <form onSubmit={onSubmit} className="contact-right">
+                <form onSubmit={onSubmit} className="contact-right card reveal" style={{ '--reveal-delay': '0.1s' }}>
                     {formStatus.submitted && (
-                        <div className={`form-status ${formStatus.success ? 'success' : 'error'}`}>
+                        <div className={`form-status ${formStatus.success ? 'success' : 'error'}`} role="status">
                             {formStatus.message}
                         </div>
                     )}
-                    <label htmlFor="">Your Name</label>
-                    <input type="text" placeholder='Enter your name' name='name' required/>
-                    <label htmlFor="">Your Email</label>
-                    <input type="email" placeholder='Enter your email' name='email' required/>
-                    <label htmlFor="">Write your message here</label>
-                    <textarea name="message" rows="8" placeholder='Enter your message' required></textarea>
-                    <button type="submit" className="contact-submit" disabled={formStatus.submitted && !formStatus.success}>
+                    <label htmlFor="contact-name">Your Name</label>
+                    <input id="contact-name" type="text" placeholder='Enter your name' name='name' autoComplete="name" required/>
+                    <label htmlFor="contact-email">Your Email</label>
+                    <input id="contact-email" type="email" placeholder='Enter your email' name='email' autoComplete="email" required/>
+                    <label htmlFor="contact-message">Write your message here</label>
+                    <textarea id="contact-message" name="message" rows="8" placeholder='Enter your message' required></textarea>
+                    <button type="submit" className="btn btn--primary contact-submit" disabled={formStatus.submitted && !formStatus.success}>
                         {formStatus.submitted && !formStatus.success ? 'Sending...' : 'Submit now'}
                     </button>
                 </form>
             </div>
-        </div>
+        </section>
     )
 }
 
