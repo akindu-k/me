@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './OpenSource.css'
-import { FaGithub, FaCodeBranch, FaExternalLinkAlt, FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import { FiGithub, FiGitCommit, FiArrowUpRight, FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import { useReveal } from '../../motion'
 
 const jaseci_commits = [
     {
@@ -56,58 +57,53 @@ const jaseci_commits = [
 const OpenSource = () => {
     const [showAll, setShowAll] = useState(false)
     const visible = showAll ? jaseci_commits : jaseci_commits.slice(0, 4)
+    const ref = useReveal()
 
     return (
-        <div id="opensource" className="opensource">
-            <div className="opensource-title">
-                <h1>Open Source</h1>
+        <section id="opensource" className="opensource section section--white" ref={ref}>
+            <div className="container section-header">
+                <h1 className="headline reveal">Open Source</h1>
             </div>
 
-            <div className="opensource-card">
-                <div className="oss-card-header">
-                    <div className="oss-repo-info">
-                        <FaGithub className="oss-gh-icon" />
-                        <div>
-                            <h2 className="oss-repo-name">
-                                <a
-                                    href="https://github.com/jaseci-labs/jaseci"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    jaseci-labs / jaseci
-                                    <FaExternalLinkAlt className="oss-ext-icon" />
-                                </a>
-                            </h2>
-                            <p className="oss-repo-desc">
-                                An open-source AI-native programming language and framework for building production AI applications.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="oss-stats">
-                        <div className="oss-stat">
-                            <FaCodeBranch />
-                            <span>{jaseci_commits.length} commits</span>
-                        </div>
-                        <div className="oss-stat">
-                            <span className="oss-focus-label">Focus areas:</span>
-                            <div className="oss-focus-tags">
-                                <span className="oss-focus-tag">Database Robustness</span>
-                                <span className="oss-focus-tag">Redis Caching</span>
-                                <span className="oss-focus-tag">Async LLM</span>
-                            </div>
+            <div className="container opensource-bento">
+                <div className="oss-tile oss-repo card reveal">
+                    <FiGithub className="oss-gh-icon" />
+                    <h2 className="oss-repo-name">
+                        <a
+                            href="https://github.com/jaseci-labs/jaseci"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            jaseci-labs / jaseci
+                            <FiArrowUpRight className="oss-ext-icon" />
+                        </a>
+                    </h2>
+                    <p className="oss-repo-desc">
+                        An open-source AI-native programming language and framework for building production AI applications.
+                    </p>
+                    <div className="oss-focus">
+                        <span className="oss-focus-label">Focus areas:</span>
+                        <div className="oss-focus-tags">
+                            <span className="pill">Database Robustness</span>
+                            <span className="pill">Redis Caching</span>
+                            <span className="pill">Async LLM</span>
                         </div>
                     </div>
                 </div>
 
-                <div className="oss-commits-label">Recent Contributions</div>
-                <div className="oss-commits-list">
-                    {visible.map((commit, i) => (
-                        <div className="oss-commit" key={i}>
-                            <div className="oss-commit-left">
+                <div className="oss-tile oss-stat card reveal" style={{ '--reveal-delay': '0.08s' }}>
+                    <FiGitCommit className="oss-stat-icon" />
+                    <p className="oss-stat-value">{jaseci_commits.length}</p>
+                    <p className="oss-stat-label">commits</p>
+                </div>
+
+                <div className="oss-tile oss-commits card reveal" style={{ '--reveal-delay': '0.16s' }}>
+                    <div className="oss-commits-label">Recent Contributions</div>
+                    <div className="oss-commits-list">
+                        {visible.map((commit, i) => (
+                            <div className="oss-commit" key={i}>
                                 <span className="oss-sha">{commit.sha}</span>
                                 <p className="oss-commit-msg">{commit.message}</p>
-                            </div>
-                            <div className="oss-commit-right">
                                 <div className="oss-commit-tags">
                                     {commit.tags.map((tag, ti) => (
                                         <span className="oss-commit-tag" key={ti}>{tag}</span>
@@ -115,24 +111,26 @@ const OpenSource = () => {
                                 </div>
                                 <span className="oss-commit-date">{commit.date}</span>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    <div className="oss-actions">
+                        <button className="oss-show-more" onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>
+                            {showAll ? <>Show less <FiChevronUp /></> : <>Show all {jaseci_commits.length} commits <FiChevronDown /></>}
+                        </button>
+
+                        <a
+                            href="https://github.com/akindu-k"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-chevron oss-profile-link"
+                        >
+                            View GitHub Profile
+                        </a>
+                    </div>
                 </div>
-
-                <button className="oss-show-more" onClick={() => setShowAll(!showAll)}>
-                    {showAll ? <><FaChevronUp /> Show less</> : <><FaChevronDown /> Show all {jaseci_commits.length} commits</>}
-                </button>
-
-                <a
-                    href="https://github.com/akindu-k"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="oss-profile-link"
-                >
-                    <FaGithub /> View GitHub Profile
-                </a>
             </div>
-        </div>
+        </section>
     )
 }
 

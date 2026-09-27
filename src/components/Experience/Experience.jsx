@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './Experience.css'
-import { FaBriefcase, FaUniversity, FaUsers, FaChevronDown, FaChevronUp, FaExternalLinkAlt } from 'react-icons/fa'
+import { FiBriefcase, FiBookOpen, FiUsers, FiPlus } from 'react-icons/fi'
+import Scroller from '../Scroller/Scroller'
+import { useReveal } from '../../motion'
 
 const professional = [
     {
@@ -10,8 +12,7 @@ const professional = [
         period: "Nov 2025 – Present",
         duration: "7 mos",
         location: "On-site",
-        desc: "Working on AI and language technology research and development at Jaseci Labs, contributing to the open-source Jaseci ecosystem.",
-        color: "#ff00ff"
+        desc: "Working on AI and language technology research and development at Jaseci Labs, contributing to the open-source Jaseci ecosystem."
     },
     {
         role: "Research Assistant",
@@ -20,8 +21,7 @@ const professional = [
         period: "Nov 2025 – Present",
         duration: "7 mos",
         location: "Remote",
-        desc: "Conducting research in AI and intelligent systems as part of Khalifa University's research initiatives.",
-        color: "#00cfff"
+        desc: "Conducting research in AI and intelligent systems as part of Khalifa University's research initiatives."
     },
     {
         role: "Chief Technical Officer",
@@ -30,8 +30,7 @@ const professional = [
         period: "Oct 2025 – Present",
         duration: "8 mos",
         location: null,
-        desc: "Leading technical strategy and engineering direction at CORTE X.",
-        color: "#ff6600"
+        desc: "Leading technical strategy and engineering direction at CORTE X."
     }
 ]
 
@@ -124,97 +123,110 @@ const involvement = [
 
 const InvolvementCard = ({ item }) => {
     const [open, setOpen] = useState(false)
+    const hasDetails = item.roles.some((role) => role.desc)
 
     return (
-        <div className={`involvement-card ${open ? 'open' : ''}`}>
-            <button className="involvement-header" onClick={() => setOpen(!open)}>
-                <div className="involvement-org-info">
-                    <span className="involvement-org-name">{item.org}</span>
+        <article className={`involvement-card card ${open ? 'open' : ''}`}>
+            <div className="involvement-header">
+                <span className="involvement-icon"><FiUsers /></span>
+                <h3 className="involvement-org-name">{item.org}</h3>
+                <p className="involvement-meta">
                     {item.total && <span className="involvement-total">{item.total}</span>}
-                </div>
-                <span className="involvement-count">{item.roles.length} role{item.roles.length > 1 ? 's' : ''}</span>
-                <span className="involvement-chevron">{open ? <FaChevronUp /> : <FaChevronDown />}</span>
-            </button>
-            {open && (
-                <div className="involvement-roles">
-                    {item.roles.map((role, i) => (
-                        <div className="involvement-role" key={i}>
-                            <div className="role-header">
-                                <span className="role-dot" />
-                                <div>
-                                    <p className="role-title">{role.title}</p>
-                                    <p className="role-period">{role.period}</p>
-                                    {role.desc && <p className="role-desc">{role.desc}</p>}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                    <span className="involvement-count">{item.roles.length} role{item.roles.length > 1 ? 's' : ''}</span>
+                </p>
+            </div>
+            <div className="involvement-roles">
+                {item.roles.map((role, i) => (
+                    <div className="involvement-role" key={i}>
+                        <p className="role-title">{role.title}</p>
+                        <p className="role-period">{role.period}</p>
+                        {role.desc && <p className="role-desc">{role.desc}</p>}
+                    </div>
+                ))}
+            </div>
+            {hasDetails && (
+                <button
+                    className="involvement-toggle"
+                    onClick={() => setOpen(!open)}
+                    aria-expanded={open}
+                    aria-label={open ? `Hide details for ${item.org}` : `Show details for ${item.org}`}
+                >
+                    <FiPlus />
+                </button>
             )}
-        </div>
+        </article>
     )
 }
 
+const tabs = [
+    { id: 'professional', label: 'Professional', icon: <FiBriefcase /> },
+    { id: 'academic', label: 'Academic', icon: <FiBookOpen /> },
+    { id: 'involvement', label: 'Leadership & Volunteering', icon: <FiUsers /> },
+]
+
 const Experience = () => {
     const [activeTab, setActiveTab] = useState('professional')
+    const ref = useReveal()
 
     return (
-        <div id="experience" className="experience">
-            <div className="experience-title">
-                <h1>Experience</h1>
+        <section id="experience" className="experience section section--gray" ref={ref}>
+            <div className="container section-header">
+                <h1 className="headline reveal">Experience</h1>
             </div>
 
-            <div className="experience-tabs">
-                <button
-                    className={`exp-tab ${activeTab === 'professional' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('professional')}
-                >
-                    <FaBriefcase /> Professional
-                </button>
-                <button
-                    className={`exp-tab ${activeTab === 'academic' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('academic')}
-                >
-                    <FaUniversity /> Academic
-                </button>
-                <button
-                    className={`exp-tab ${activeTab === 'involvement' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('involvement')}
-                >
-                    <FaUsers /> Leadership & Volunteering
-                </button>
+            <div className="container experience-tabs-wrap reveal">
+                <div className="experience-tabs" role="tablist">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.id}
+                            role="tab"
+                            aria-selected={activeTab === tab.id}
+                            className={`exp-tab ${activeTab === tab.id ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab.id)}
+                        >
+                            {tab.icon} {tab.label}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             {activeTab === 'professional' && (
-                <div className="professional-grid">
-                    {professional.map((item, i) => (
-                        <div className="pro-card" key={i} style={{ '--accent': item.color }}>
-                            <div className="pro-card-top">
-                                <div className="pro-role-badge">
-                                    <FaBriefcase />
-                                </div>
-                                <div>
+                <div className="container compare-wrap">
+                    <div className="compare" role="table" aria-label="Professional experience">
+                        <div className="compare-row compare-row--head" role="row">
+                            {professional.map((item, i) => (
+                                <div className="compare-cell compare-head reveal" role="columnheader" key={i} style={{ '--reveal-delay': `${0.08 * i}s` }}>
+                                    <span className="compare-icon"><FiBriefcase /></span>
                                     <h3 className="pro-role">{item.role}</h3>
                                     <p className="pro-org">{item.org}</p>
+                                    <p className="pro-desc">{item.desc}</p>
                                 </div>
-                            </div>
-                            <p className="pro-desc">{item.desc}</p>
-                            <div className="pro-meta">
-                                <span className="pro-type">{item.type}</span>
-                                <span className="pro-period">{item.period}</span>
-                                {item.location && <span className="pro-location">{item.location}</span>}
-                            </div>
-                            <div className="pro-duration">{item.duration}</div>
+                            ))}
                         </div>
-                    ))}
+                        {[
+                            ['Type', 'type'],
+                            ['Period', 'period'],
+                            ['Duration', 'duration'],
+                            ['Location', 'location'],
+                        ].map(([label, key]) => (
+                            <div className="compare-row reveal" role="row" key={key}>
+                                {professional.map((item, i) => (
+                                    <div className="compare-cell" role="cell" key={i}>
+                                        <span className="compare-label">{label}</span>
+                                        <span className={`compare-value ${item[key] ? '' : 'compare-value--empty'}`}>{item[key] || '—'}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
 
             {activeTab === 'academic' && (
-                <div className="academic-section">
-                    <div className="academic-card">
+                <div className="container academic-section">
+                    <div className="academic-card card reveal">
                         <div className="academic-header">
-                            <FaUniversity className="academic-icon" />
+                            <span className="academic-icon"><FiBookOpen /></span>
                             <div>
                                 <h3>Department of Electrical Engineering</h3>
                                 <p className="academic-uni">University of Moratuwa</p>
@@ -238,13 +250,15 @@ const Experience = () => {
             )}
 
             {activeTab === 'involvement' && (
-                <div className="involvement-list">
-                    {involvement.map((item, i) => (
-                        <InvolvementCard item={item} key={i} />
-                    ))}
+                <div className="involvement-list reveal">
+                    <Scroller label="Leadership and volunteering">
+                        {involvement.map((item, i) => (
+                            <InvolvementCard item={item} key={i} />
+                        ))}
+                    </Scroller>
                 </div>
             )}
-        </div>
+        </section>
     )
 }
 

@@ -1,38 +1,94 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Navbar.css"
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import menu_open from "../../assets/menu_open.svg"
-import menu_close from "../../assets/menu_close.svg"
-// import logo from "../../assets/logo.svg"
+
+const links = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About Me" },
+  { id: "experience", label: "Experience" },
+  { id: "work", label: "Projects" },
+  { id: "opensource", label: "Open Source" },
+  { id: "blog", label: "Blog" },
+  { id: "contact", label: "Contact" },
+]
 
 const Navbar = () => {
 
-  const [menu,setMenu] = useState(false);
-  const menuRef = useRef();
+  const [menu, setMenu] = useState("home");
+  const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(true);
 
-  const openMenu = () => {
-    menuRef.current.style.right = "0";
+  // Track which section sits under the nav bar to pick the active link and
+  // whether the glass should be light or dark.
+  useEffect(() => {
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const probe = 60
+      let current = links[0].id
+      for (const { id } of links) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= probe) current = id
+      }
+      setMenu(current)
+      // Sample just below the bar's bottom edge (48px), allowing for sub-pixel layout.
+      const under = [...document.querySelectorAll('section, footer')].find((el) => {
+        const rect = el.getBoundingClientRect()
+        return rect.top <= 50 && rect.bottom > 50
+      })
+      setDark(Boolean(under && under.classList.contains('section--dark')))
+    }
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+  }, [open])
+
+  const select = (id) => {
+    setMenu(id)
+    setOpen(false)
   }
 
-  const closeMenu = () => {
-    menuRef.current.style.right = "-350px";
-  }
   return (
-    <div className='navbar'>
-      {/* <img src={logo} alt='' /> */}
-      <img src={menu_open} onClick={openMenu} alt="" className='nav-mob-open' />
-      <ul ref={menuRef} className="nav-menu">
-        <img src={menu_close} onClick={closeMenu} alt="" className="nav-mob-close" />
-        <li onClick={() => setMenu("home")}><AnchorLink className='anchor-link' offset={50} href='#home'><p className={menu === "home" ? "active" : ""}>Home</p></AnchorLink></li>
-        <li onClick={() => setMenu("about")}><AnchorLink className='anchor-link' offset={50} href='#about'><p className={menu === "about" ? "active" : ""}>About Me</p></AnchorLink></li>
-        <li onClick={() => setMenu("experience")}><AnchorLink className='anchor-link' offset={50} href='#experience'><p className={menu === "experience" ? "active" : ""}>Experience</p></AnchorLink></li>
-        <li onClick={() => setMenu("work")}><AnchorLink className='anchor-link' offset={50} href='#work'><p className={menu === "work" ? "active" : ""}>Projects</p></AnchorLink></li>
-        <li onClick={() => setMenu("opensource")}><AnchorLink className='anchor-link' offset={50} href='#opensource'><p className={menu === "opensource" ? "active" : ""}>Open Source</p></AnchorLink></li>
-        <li onClick={() => setMenu("blog")}><AnchorLink className='anchor-link' offset={50} href='#blog'><p className={menu === "blog" ? "active" : ""}>Blog</p></AnchorLink></li>
-        <li onClick={() => setMenu("contact")}><AnchorLink className='anchor-link' offset={50} href='#contact'><p className={menu === "contact" ? "active" : ""}>Contact</p></AnchorLink></li>
-      </ul>
-      <div className="nav-connect"><AnchorLink className='anchor-link' offset={50} href='#contact'><p className={menu === "contact" ? "active" : ""}>Connect With Me</p></AnchorLink></div>
-    </div>
+    <header className={`navbar ${dark && !open ? 'navbar--dark' : ''} ${open ? 'navbar--open' : ''}`}>
+      <nav className="nav-inner">
+        <AnchorLink className="nav-brand" offset={0} href="#home" onClick={() => select("home")}>Akindu Kalhan</AnchorLink>
+        <ul className="nav-menu">
+          {links.map(({ id, label }) => (
+            <li key={id}>
+              <AnchorLink className={`nav-link ${menu === id ? "active" : ""}`} offset={id === "home" ? 0 : 48} href={`#${id}`} onClick={() => select(id)}>{label}</AnchorLink>
+            </li>
+          ))}
+        </ul>
+        <AnchorLink className="btn btn--primary btn--small nav-connect" offset={48} href="#contact" onClick={() => select("contact")}>Connect With Me</AnchorLink>
+        <button
+          className="nav-toggle"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          <span /><span />
+        </button>
+      </nav>
+      <div className="nav-mobile" aria-hidden={!open}>
+        <ul>
+          {links.map(({ id, label }, i) => (
+            <li key={id} style={{ '--i': i }}>
+              <AnchorLink className={menu === id ? "active" : ""} offset={id === "home" ? 0 : 48} href={`#${id}`} onClick={() => select(id)} tabIndex={open ? 0 : -1}>{label}</AnchorLink>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </header>
   )
 }
 

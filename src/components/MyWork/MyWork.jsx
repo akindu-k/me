@@ -1,6 +1,6 @@
 // import React from 'react'
 import './MyWork.css'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 // import theme_pattern from "../../assets/theme_pattern.svg"
 
 import project1_img from "../../assets/project_1.svg"
@@ -14,7 +14,8 @@ import project_festival_card from "../../assets/project_festival_card.svg"
 import project_leo_rag from "../../assets/project_leo_rag.svg"
 import project_batch_voting from "../../assets/project_batch_voting.svg"
 
-import { FaGithub, FaTimes } from 'react-icons/fa'; // Added FaTimes import
+import { FiGithub, FiX } from 'react-icons/fi';
+import { useReveal } from '../../motion'
 
 
 
@@ -104,96 +105,112 @@ const mywork_data = [
 
 
 
+// Bento layout: a couple of tiles span two columns to break up the grid.
+const wideTiles = new Set([0, 6])
+
 const MyWork = () => {
     const [selectedProject, setSelectedProject] = useState(null);
-    
+    const ref = useReveal();
+    const modalRef = useRef(null);
+
     // Function to open the modal with project details
     const openProjectModal = (project) => {
         setSelectedProject(project);
         document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
     };
-    
+
     // Function to close the modal
     const closeProjectModal = () => {
         setSelectedProject(null);
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
+        document.body.style.overflow = ''; // Re-enable scrolling
     };
 
+    useEffect(() => {
+        if (!selectedProject) return
+        modalRef.current?.focus()
+        const onKey = (e) => { if (e.key === 'Escape') closeProjectModal() }
+        window.addEventListener('keydown', onKey)
+        return () => window.removeEventListener('keydown', onKey)
+    }, [selectedProject]);
+
     return (
-      <div id='work' className='mywork'>
-          <div className="mywork-title">
-              <h1>My latest work</h1>
+      <section id='work' className='mywork section section--dark' ref={ref}>
+          <div className="container section-header">
+              <h1 className="headline reveal">My latest work</h1>
           </div>
-          <div className="mywork-container">
-              {mywork_data.map((work, index) => {
-                  return (
-                      <div className="project-card" key={index} onClick={() => openProjectModal(work)}>
-                          <div className="project-card-inner">
-                              <div className="project-image-container">
-                                  <img src={work.w_img} alt={work.w_name} />
-                              </div>
+          <div className="container container--wide">
+              <div className="mywork-container">
+                  {mywork_data.map((work, index) => {
+                      return (
+                          <article
+                              className={`project-card card card--hover reveal ${wideTiles.has(index) ? 'project-card--wide' : ''}`}
+                              key={index}
+                              style={{ '--reveal-delay': `${(index % 3) * 0.08}s` }}
+                              onClick={() => openProjectModal(work)}
+                              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProjectModal(work) } }}
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`${work.w_name}, view details`}
+                          >
                               <div className="project-info">
+                                  <div className="project-tags">
+                                      {work.w_tags.map((tag, tagIndex) => (
+                                          <span key={tagIndex} className="tag">{tag}</span>
+                                      ))}
+                                  </div>
                                   <h3>{work.w_name}</h3>
                                   <p>{work.w_desc}</p>
-                                  <div className="project-footer">
-                                      <div className="project-tags">
-                                          {work.w_tags.map((tag, tagIndex) => (
-                                              <span key={tagIndex} className="tag">{tag}</span>
-                                          ))}
-                                      </div>
-                                      <a 
-                                          href={work.w_github} 
-                                          target="_blank" 
-                                          rel="noopener noreferrer" 
-                                          className="github-link" 
-                                          title="View on GitHub"
-                                          onClick={(e) => {
-                                              e.stopPropagation();  // Prevent card click event
-                                              e.preventDefault();   // Prevent default link behavior
-                                              window.open(work.w_github, '_blank'); // Open in new tab
-                                          }}
-                                      >
-                                          <FaGithub />
-                                      </a>
-                                  </div>
+                                  <a
+                                      href={work.w_github}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="link-chevron github-link"
+                                      onClick={(e) => e.stopPropagation()}
+                                      onKeyDown={(e) => e.stopPropagation()}
+                                  >
+                                      View on GitHub
+                                  </a>
                               </div>
-                          </div>
-                      </div>
-                  )
-              })}
+                              <div className="project-image-container">
+                                  <img src={work.w_img} alt={work.w_name} loading="lazy" />
+                              </div>
+                          </article>
+                      )
+                  })}
+              </div>
           </div>
-          
+
           {/* Project Modal */}
           {selectedProject && (
               <div className="project-modal-overlay" onClick={closeProjectModal}>
-                  <div className="project-modal" onClick={(e) => e.stopPropagation()}>
-                      <button className="modal-close-btn" onClick={closeProjectModal}>
-                          <FaTimes />
+                  <div className="project-modal" ref={modalRef} tabIndex={-1} role="dialog" aria-modal="true" aria-label={selectedProject.w_name} onClick={(e) => e.stopPropagation()}>
+                      <button className="modal-close-btn" onClick={closeProjectModal} aria-label="Close">
+                          <FiX />
                       </button>
-                      <div className="modal-image-container">
-                          <img src={selectedProject.w_img} alt={selectedProject.w_name} />
-                      </div>
                       <div className="modal-content">
-                          <h2>{selectedProject.w_name}</h2>
-                          <p className="modal-description">{selectedProject.w_desc}</p>
                           <div className="modal-tags">
                               {selectedProject.w_tags.map((tag, index) => (
                                   <span key={index} className="modal-tag">{tag}</span>
                               ))}
                           </div>
-                          <a 
-                              href={selectedProject.w_github} 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              className="modal-github-link"
+                          <h2>{selectedProject.w_name}</h2>
+                          <p className="modal-description">{selectedProject.w_desc}</p>
+                          <a
+                              href={selectedProject.w_github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn--primary modal-github-link"
                           >
-                              <FaGithub /> View on GitHub
+                              <FiGithub /> View on GitHub
                           </a>
+                      </div>
+                      <div className="modal-image-container">
+                          <img src={selectedProject.w_img} alt={selectedProject.w_name} />
                       </div>
                   </div>
               </div>
           )}
-      </div>
+      </section>
     )
 }
 

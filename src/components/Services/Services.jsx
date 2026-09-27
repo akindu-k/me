@@ -1,5 +1,7 @@
 import React from 'react'
 import "./Services.css"
+import { RiMediumLine } from 'react-icons/ri'
+import { useReveal } from '../../motion'
 // import theme_pattern from "../../assets/theme_pattern.svg"
 // import arrow_icon from "../../assets/arrow_icon.svg"
 
@@ -22,36 +24,40 @@ const Blog_Data = [
 ]
 
 const BlogPosts = () => {
+  const ref = useReveal()
+
   return (
-    <div id='blog' className='services'>
-      <div className='services-title'>
-        <h1>My Blog Posts</h1>
-        {/* <img src={theme_pattern} alt="" /> */}
+    <section id='blog' className='services section section--gray' ref={ref}>
+      <div className='container section-header'>
+        <h1 className="headline reveal">My Blog Posts</h1>
       </div>
 
-      <div className='services-container'>
+      <div className='container services-container'>
         {Blog_Data.map((post, index) => {
           return (
-            <a 
-              href={post.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              key={index} 
-              className='services-format blog-post'
+            <a
+              href={post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={index}
+              className={`services-format blog-post card card--hover reveal ${index === 0 ? 'blog-post--feature' : ''}`}
+              style={{ '--reveal-delay': `${index * 0.1}s` }}
             >
-              <h3>{post.id}</h3>
-              <h2>{post.title}</h2>
+              <div className="blog-top">
+                <h3>{post.id}</h3>
+                <RiMediumLine className="blog-icon" aria-hidden="true" />
+              </div>
+              <h2>{post.title.trim()}</h2>
               <p className="post-date">{post.date}</p>
-              <p>{post.excerpt}</p>
+              <p className="post-excerpt">{post.excerpt}</p>
               <div className='services-readmore'>
-                <p>Read on Medium</p>
-                {/* <img src={arrow_icon} alt="" /> */}
+                <span className="link-chevron">Read on Medium</span>
               </div>
             </a>
           )
         })}
       </div>
-    </div>
+    </section>
   )
 }
 
