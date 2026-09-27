@@ -13,8 +13,12 @@ import project_cutflow from "../../assets/project_cutflow.svg"
 import project_festival_card from "../../assets/project_festival_card.svg"
 import project_leo_rag from "../../assets/project_leo_rag.svg"
 import project_batch_voting from "../../assets/project_batch_voting.svg"
+import project_alii from "../../assets/project_alii.svg"
+import project_voice_assistant from "../../assets/project_voice_assistant.svg"
+import project_audio_visualizer from "../../assets/project_audio_visualizer.svg"
+import project_calculator from "../../assets/project_calculator.svg"
 
-import { FiGithub, FiX } from 'react-icons/fi';
+import { FiArrowUpRight, FiChevronDown, FiChevronUp, FiGithub, FiX } from 'react-icons/fi';
 import { useReveal } from '../../motion'
 
 
@@ -99,19 +103,70 @@ const mywork_data = [
         w_img: project_batch_voting,
         w_tags: ["React", "Google Sheets API", "Vercel", "Chart.js"],
         w_github: "https://github.com/akindu-k/batch-rep-voting"
+    },
+    {
+        w_no: 11,
+        w_name: "Advanced Light Intensity Indicator (ALII)",
+        w_desc: "A smart module built for the EE3024 Digital Signal Processing course that senses light with an LDR and shows the level from 0 to 7 on a seven-segment display. An adjustable stabilization period (30–300 s) ignores sudden fluctuations, and it can show the average intensity over 300–900 s, with a path to solar-powered operation for smart-city energy management.",
+        w_img: project_alii,
+        w_tags: ["Digital Signal Processing", "Sensor Integration", "Circuit Design"]
+    },
+    {
+        w_no: 12,
+        w_name: "Voice Assistant with GPT-3 and IBM Watson",
+        w_desc: "A voice-powered assistant that captures speech with speech-to-text, answers with OpenAI's GPT-3 and replies through text-to-speech. Built as a full-stack web app with a Python Flask backend and an HTML, CSS and JavaScript frontend.",
+        w_img: project_voice_assistant,
+        w_tags: ["NLP", "Python Flask", "OpenAI"],
+        w_github: "https://github.com/akindu-k/chatapp-with-voice-and-openai-outline"
+    },
+    {
+        w_no: 13,
+        w_name: "Audio Frequency Visualization",
+        w_desc: "An audio visualizer that syncs visual effects to the frequencies in a track, separating treble from bass. Uses FFT (scipy.fftpack) and numpy for analysis, pydub for audio processing and pygame for rendering and playback.",
+        w_img: project_audio_visualizer,
+        w_tags: ["Python", "Digital Signal Processing", "Pygame"],
+        w_link: "https://bit.ly/AudioFrequencyVisualizationDemo",
+        w_link_label: "Watch the demo"
+    },
+    {
+        w_no: 14,
+        w_name: "Akindu's Calculator",
+        w_desc: "A calculator inspired by the iOS calculator's UI, built with HTML, CSS and JavaScript. Supports the four basic operations, full keyboard input, a context-aware clear button and a delete key for precise edits.",
+        w_img: project_calculator,
+        w_tags: ["HTML", "CSS", "JavaScript"]
     }
 ];
 
+// Where a project card links to: its repo, else a demo/live link, else nothing.
+const projectLink = (work) =>
+    work.w_github
+        ? { href: work.w_github, label: "View on GitHub", github: true }
+        : work.w_link
+            ? { href: work.w_link, label: work.w_link_label || "View project", github: false }
+            : null;
 
 
 
-// Bento layout: a couple of tiles span two columns to break up the grid.
-const wideTiles = new Set([0, 6])
+
+// Bento layout: these tiles span two columns, chosen so every row of the 3-column grid is full.
+const wideTiles = new Set([0, 6, 11, 13])
+// Tiles shown before "Show all": three full rows of the desktop grid.
+const INITIAL_COUNT = 7
 
 const MyWork = () => {
     const [selectedProject, setSelectedProject] = useState(null);
+    const [showAll, setShowAll] = useState(false);
     const ref = useReveal();
     const modalRef = useRef(null);
+    const visible = showAll ? mywork_data : mywork_data.slice(0, INITIAL_COUNT);
+    // On the 2-column tablet grid the first tile spans both columns; the last
+    // one does too when the tiles in between would otherwise leave a gap.
+    const lastSpansTablet = (visible.length - 1) % 2 === 1;
+
+    const toggleShowAll = () => {
+        if (showAll) ref.current?.scrollIntoView({ behavior: 'smooth' });
+        setShowAll(!showAll);
+    };
 
     // Function to open the modal with project details
     const openProjectModal = (project) => {
@@ -140,10 +195,10 @@ const MyWork = () => {
           </div>
           <div className="container container--wide">
               <div className="mywork-container">
-                  {mywork_data.map((work, index) => {
+                  {visible.map((work, index) => {
                       return (
                           <article
-                              className={`project-card card card--hover reveal ${wideTiles.has(index) ? 'project-card--wide' : ''}`}
+                              className={`project-card card card--hover reveal ${wideTiles.has(index) ? 'project-card--wide' : ''} ${index === 0 || (lastSpansTablet && index === visible.length - 1) ? 'project-card--tablet-wide' : ''}`}
                               key={index}
                               style={{ '--reveal-delay': `${(index % 3) * 0.08}s` }}
                               onClick={() => openProjectModal(work)}
@@ -160,16 +215,18 @@ const MyWork = () => {
                                   </div>
                                   <h3>{work.w_name}</h3>
                                   <p>{work.w_desc}</p>
-                                  <a
-                                      href={work.w_github}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="link-chevron github-link"
-                                      onClick={(e) => e.stopPropagation()}
-                                      onKeyDown={(e) => e.stopPropagation()}
-                                  >
-                                      View on GitHub
-                                  </a>
+                                  {projectLink(work) && (
+                                      <a
+                                          href={projectLink(work).href}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="link-chevron github-link"
+                                          onClick={(e) => e.stopPropagation()}
+                                          onKeyDown={(e) => e.stopPropagation()}
+                                      >
+                                          {projectLink(work).label}
+                                      </a>
+                                  )}
                               </div>
                               <div className="project-image-container">
                                   <img src={work.w_img} alt={work.w_name} loading="lazy" />
@@ -178,6 +235,13 @@ const MyWork = () => {
                       )
                   })}
               </div>
+              {mywork_data.length > INITIAL_COUNT && (
+                  <div className="mywork-more">
+                      <button className="mywork-more-btn" onClick={toggleShowAll} aria-expanded={showAll}>
+                          {showAll ? <>Show fewer projects <FiChevronUp /></> : <>Show all {mywork_data.length} projects <FiChevronDown /></>}
+                      </button>
+                  </div>
+              )}
           </div>
 
           {/* Project Modal */}
@@ -195,14 +259,16 @@ const MyWork = () => {
                           </div>
                           <h2>{selectedProject.w_name}</h2>
                           <p className="modal-description">{selectedProject.w_desc}</p>
-                          <a
-                              href={selectedProject.w_github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="btn btn--primary modal-github-link"
-                          >
-                              <FiGithub /> View on GitHub
-                          </a>
+                          {projectLink(selectedProject) && (
+                              <a
+                                  href={projectLink(selectedProject).href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="btn btn--primary modal-github-link"
+                              >
+                                  {projectLink(selectedProject).github ? <FiGithub /> : <FiArrowUpRight />} {projectLink(selectedProject).label}
+                              </a>
+                          )}
                       </div>
                       <div className="modal-image-container">
                           <img src={selectedProject.w_img} alt={selectedProject.w_name} />

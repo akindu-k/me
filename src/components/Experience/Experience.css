@@ -52,12 +52,13 @@
 .compare-wrap::-webkit-scrollbar { display: none; }
 
 .compare {
-    min-width: 720px;
+    --cols: 3;
+    min-width: calc(var(--cols) * 220px);
 }
 
 .compare-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--cols), 1fr);
     column-gap: clamp(20px, 3vw, 40px);
 }
 
@@ -90,7 +91,7 @@
 }
 
 .pro-role {
-    font-size: 24px;
+    font-size: 21px;
     font-weight: 600;
     line-height: 1.17;
     letter-spacing: 0.009em;
@@ -133,10 +134,40 @@
 
 /* Academic */
 
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
 .academic-card {
-    max-width: 720px;
-    margin: 0 auto;
     padding: clamp(28px, 4vw, 48px);
+}
+
+.academic-card--wide {
+    grid-column: 1 / -1;
+}
+
+.academic-desc {
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.47;
+    color: var(--text-secondary);
+}
+
+.academic-activities {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+}
+
+.academic-activities li {
+    padding: 5px 12px;
+    border-radius: 980px;
+    font-size: 13px;
+    background: var(--gray-bg);
 }
 
 .academic-header {
@@ -339,7 +370,12 @@
     }
 
     .compare {
-        min-width: 540px;
+        min-width: calc(var(--cols) * 180px);
+    }
+
+    .education-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
 
     .pro-role { font-size: 21px; }

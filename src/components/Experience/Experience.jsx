@@ -6,54 +6,96 @@ import { useReveal } from '../../motion'
 
 const professional = [
     {
+        role: "Associate Software Engineer",
+        org: "Jaseci Labs",
+        type: "Part-time",
+        period: "Jul 2026 – Present",
+        duration: "3 mos",
+        location: null,
+        desc: "Continuing on the jac-scale team, building the systems that deploy and scale Jac applications in the open-source Jaseci ecosystem."
+    },
+    {
         role: "AI Intern",
         org: "Jaseci Labs",
         type: "Full-time",
-        period: "Nov 2025 – Present",
-        duration: "7 mos",
+        period: "Nov 2025 – Jun 2026",
+        duration: "8 mos",
         location: "On-site",
-        desc: "Working on AI and language technology research and development at Jaseci Labs, contributing to the open-source Jaseci ecosystem."
+        desc: "Worked on jac-scale across the memory hierarchy and server layers: MongoDB persistence, L1/L2 and Redis caching, data integrity and recovery, JWT auth and SSO, and REST APIs."
     },
     {
         role: "Research Assistant",
         org: "Khalifa University",
         type: "Part-time",
-        period: "Nov 2025 – Present",
+        period: "Nov 2025 – May 2026",
         duration: "7 mos",
         location: "Remote",
-        desc: "Conducting research in AI and intelligent systems as part of Khalifa University's research initiatives."
+        desc: "Conducted research in AI and intelligent systems as part of Khalifa University's research initiatives."
     },
     {
         role: "Chief Technical Officer",
-        org: "CORTE X",
+        org: "Tapro Media",
         type: "Part-time",
-        period: "Oct 2025 – Present",
-        duration: "8 mos",
+        period: "Oct 2025 – Sep 2026",
+        duration: "1 yr",
         location: null,
-        desc: "Leading technical strategy and engineering direction at CORTE X."
+        desc: "Led technical strategy and engineering direction at Tapro Media."
     }
 ]
 
-const academic = [
+const education = [
     {
-        role: "Department Representative",
-        period: "Jan 2025 – May 2026",
-        duration: "1 yr 5 mos",
+        school: "University of Moratuwa",
+        program: "Department of Electrical Engineering",
+        sub: "Full-time · 3 yrs 8 mos",
+        roles: [
+            { role: "Undergraduate", period: "May 2026 – Present", duration: "5 mos" },
+            { role: "Department Representative", period: "Jan 2025 – May 2026", duration: "1 yr 5 mos" },
+            { role: "Undergraduate", period: "Feb 2023 – Jan 2025", duration: "2 yrs", location: "Moratuwa, Western Province, Sri Lanka" },
+        ],
     },
     {
-        role: "Undergraduate",
-        period: "Feb 2023 – Present",
-        duration: "3+ yrs",
-        location: "Moratuwa, Western Province, Sri Lanka"
-    }
+        school: "CIMA",
+        program: "CGMA Operational Level, Management Accounting",
+        sub: "May 2026 – Present · Grade 106/150",
+        desc: "Passed the CGMA Operational Case Study Exam in August 2026 with 106 out of 150. The level covers management accounting, costing, budgeting, financial analysis, decision-making, financial reporting, corporate governance, taxation and working capital management.",
+    },
+    {
+        school: "Royal College Colombo",
+        program: "Advanced Level, Mathematics",
+        sub: "2008 – 2021",
+        activities: [
+            "Cricket – Captain, Under 15",
+            "Royal College Air Cadet Wing – Herman Loos Platoon 2019",
+            "Table Tennis",
+            "Junior Steward",
+            "Sinhala Oratory and Debating Society – Vice President",
+        ],
+    },
 ]
 
 const involvement = [
     {
+        org: "Leo District 306 D2, Sri Lanka",
+        total: "3 mos",
+        roles: [
+            { title: "District Director – Fundraising & Partnerships", period: "Jul 2026 – Present" }
+        ]
+    },
+    {
+        org: "Electrical Engineering Society – EESoc",
+        total: "2 yrs 9 mos",
+        roles: [
+            { title: "Vice President", period: "Jul 2026 – Present" },
+            { title: "Executive Committee Member", period: "Jan 2025 – Jun 2026" },
+            { title: "Member", period: "Jan 2024 – Dec 2024" }
+        ]
+    },
+    {
         org: "Leo Club of University of Moratuwa",
         total: "2 yrs 6 mos",
         roles: [
-            { title: "Treasurer", period: "Jul 2025 – May 2026" },
+            { title: "Treasurer", period: "Jul 2025 – May 2026", desc: "Oversaw the finances of projects worth over LKR 50 million, introduced three audits a year and a sponsorship-led fundraising approach. Received the Most Outstanding Club Treasurer Award at D2 CON." },
             { title: "Assistant Treasurer", period: "Jun 2024 – Jun 2025" },
             { title: "Project Chairperson – Tharka-Mahesh Abeywickrama Memorial Debating Competition", period: "Feb 2024 – May 2024", desc: "Led a 4-month initiative spanning 62 schools and 380+ students (grades 6–11) across Sri Lanka." },
             { title: "Project Chairperson – Renovate '24", period: "Jan 2024 – Feb 2024", desc: "Led renovation of the Hingurupathala Junction Bus Halt to improve accessibility for local residents." },
@@ -67,6 +109,7 @@ const involvement = [
         roles: [
             { title: "Event Coordinator", period: "Feb 2025 – Mar 2026" },
             { title: "Co-Chairperson – Speech Olympiad XVII", period: "Dec 2024 – Feb 2025" },
+            { title: "Member", period: "Apr 2024 – Dec 2024" },
             { title: "Co-Chairperson – Gavel Awurudu", period: "Mar 2024 – Apr 2024" },
             { title: "Member", period: "Nov 2023 – Mar 2024" }
         ]
@@ -118,6 +161,13 @@ const involvement = [
         roles: [
             { title: "Marketing Team Member – Caption Writing & Flyer Design", period: "Jun 2024 – Jun 2025" }
         ]
+    },
+    {
+        org: "National Cadet Corps – Sri Lanka",
+        total: "2 yrs 11 mos",
+        roles: [
+            { title: "Third Year Senior Cadet", period: "Jan 2019 – Nov 2021", desc: "Annual Air Assessment Camp at Rantambe, Guard of Honor to Admiral Ravindra Wijegunarathna at Royal College, and the Annual Hermanloos Challenge Trophy (2019)." }
+        ]
     }
 ]
 
@@ -160,7 +210,7 @@ const InvolvementCard = ({ item }) => {
 
 const tabs = [
     { id: 'professional', label: 'Professional', icon: <FiBriefcase /> },
-    { id: 'academic', label: 'Academic', icon: <FiBookOpen /> },
+    { id: 'education', label: 'Education', icon: <FiBookOpen /> },
     { id: 'involvement', label: 'Leadership & Volunteering', icon: <FiUsers /> },
 ]
 
@@ -192,7 +242,7 @@ const Experience = () => {
 
             {activeTab === 'professional' && (
                 <div className="container compare-wrap">
-                    <div className="compare" role="table" aria-label="Professional experience">
+                    <div className="compare" role="table" aria-label="Professional experience" style={{ '--cols': professional.length }}>
                         <div className="compare-row compare-row--head" role="row">
                             {professional.map((item, i) => (
                                 <div className="compare-cell compare-head reveal" role="columnheader" key={i} style={{ '--reveal-delay': `${0.08 * i}s` }}>
@@ -222,30 +272,40 @@ const Experience = () => {
                 </div>
             )}
 
-            {activeTab === 'academic' && (
-                <div className="container academic-section">
-                    <div className="academic-card card reveal">
-                        <div className="academic-header">
-                            <span className="academic-icon"><FiBookOpen /></span>
-                            <div>
-                                <h3>Department of Electrical Engineering</h3>
-                                <p className="academic-uni">University of Moratuwa</p>
-                                <p className="academic-sub">Full-time · 3 yrs 4 mos</p>
-                            </div>
-                        </div>
-                        <div className="academic-timeline">
-                            {academic.map((item, i) => (
-                                <div className="academic-role" key={i}>
-                                    <span className="academic-dot" />
-                                    <div>
-                                        <p className="academic-role-title">{item.role}</p>
-                                        <p className="academic-role-period">{item.period} · {item.duration}</p>
-                                        {item.location && <p className="academic-role-location">{item.location}</p>}
-                                    </div>
+            {activeTab === 'education' && (
+                <div className="container education-grid">
+                    {education.map((item, i) => (
+                        <div className={`academic-card card reveal ${i === 0 ? 'academic-card--wide' : ''}`} key={item.school} style={{ '--reveal-delay': `${0.08 * i}s` }}>
+                            <div className="academic-header">
+                                <span className="academic-icon"><FiBookOpen /></span>
+                                <div>
+                                    <h3>{item.program}</h3>
+                                    <p className="academic-uni">{item.school}</p>
+                                    <p className="academic-sub">{item.sub}</p>
                                 </div>
-                            ))}
+                            </div>
+                            {item.roles && (
+                                <div className="academic-timeline">
+                                    {item.roles.map((role, ri) => (
+                                        <div className="academic-role" key={ri}>
+                                            <span className="academic-dot" />
+                                            <div>
+                                                <p className="academic-role-title">{role.role}</p>
+                                                <p className="academic-role-period">{role.period} · {role.duration}</p>
+                                                {role.location && <p className="academic-role-location">{role.location}</p>}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                            {item.desc && <p className="academic-desc">{item.desc}</p>}
+                            {item.activities && (
+                                <ul className="academic-activities">
+                                    {item.activities.map((activity) => <li key={activity}>{activity}</li>)}
+                                </ul>
+                            )}
                         </div>
-                    </div>
+                    ))}
                 </div>
             )}
 

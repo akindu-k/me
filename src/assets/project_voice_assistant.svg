@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 657 435" width="657" height="435">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101a2e"/>
+      <stop offset="100%" stop-color="#05070d"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0a84ff"/>
+      <stop offset="100%" stop-color="#bf5af2"/>
+    </linearGradient>
+  </defs>
+  <rect width="657" height="435" fill="url(#bg)"/>
+  <g transform="translate(328 150)" fill="none" stroke="#f5f5f7" stroke-width="3" stroke-linecap="round" opacity="0.9">
+    <rect x="-22" y="-52" width="44" height="80" rx="22"/>
+    <path d="M-42 0a42 42 0 0 0 84 0M0 42v24M-22 66h44"/>
+  </g>
+  <g fill="url(#wave)">
+    <rect x="173" y="286" width="8" height="30" rx="4"/>
+    <rect x="193" y="276" width="8" height="50" rx="4"/>
+    <rect x="213" y="266" width="8" height="70" rx="4"/>
+    <rect x="233" y="281" width="8" height="40" rx="4"/>
+    <rect x="253" y="261" width="8" height="80" rx="4"/>
+    <rect x="273" y="271" width="8" height="60" rx="4"/>
+    <rect x="293" y="251" width="8" height="100" rx="4"/>
+    <rect x="313" y="266" width="8" height="70" rx="4"/>
+    <rect x="333" y="246" width="8" height="110" rx="4"/>
+    <rect x="353" y="266" width="8" height="70" rx="4"/>
+    <rect x="373" y="256" width="8" height="90" rx="4"/>
+    <rect x="393" y="276" width="8" height="50" rx="4"/>
+    <rect x="413" y="266" width="8" height="70" rx="4"/>
+    <rect x="433" y="281" width="8" height="40" rx="4"/>
+    <rect x="453" y="271" width="8" height="60" rx="4"/>
+    <rect x="473" y="286" width="8" height="30" rx="4"/>
+  </g>
+  <text x="328" y="400" text-anchor="middle" fill="#86868b" font-size="15" font-family="-apple-system, Helvetica, Arial" letter-spacing="2">SPEECH → GPT-3 → SPEECH</text>
+</svg>

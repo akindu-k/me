@@ -28,9 +28,17 @@
 }
 
 .hero-subhead {
-    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 760px;
     margin-top: 18px;
     color: var(--text-on-dark);
+}
+
+.hero-subhead-secondary {
+    font-size: 0.75em;
+    color: var(--text-secondary);
 }
 
 .hero-passion {
