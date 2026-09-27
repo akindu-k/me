@@ -122,7 +122,7 @@ const OpenSource = () => {
                         <div className="oss-commits-label">Recent Contributions</div>
                         {live && (
                             <span className="oss-live" title={`Fetched from GitHub ${formatUpdated(github.fetchedAt)}`}>
-                                <span className="oss-live-dot" /> Live from GitHub · {formatUpdated(github.fetchedAt)}
+                                <span className="oss-live-dot" /> From GitHub · updated {formatUpdated(github.fetchedAt)}
                             </span>
                         )}
                     </div>

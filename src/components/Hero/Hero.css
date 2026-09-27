@@ -4,10 +4,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: min(100vh, 1000px);
-    min-height: min(100svh, 1000px);
-    padding-top: calc(var(--nav-height) + 64px);
-    padding-bottom: clamp(140px, 18vh, 220px);
+    padding-top: calc(var(--nav-height) + clamp(72px, 11vh, 120px));
+    padding-bottom: var(--section-pad);
     text-align: center;
 }
 
@@ -20,6 +18,10 @@
     pointer-events: none;
 }
 
+.hero-name {
+    white-space: nowrap;
+}
+
 .hero-text {
     position: relative;
     display: flex;
@@ -28,6 +30,7 @@
 }
 
 .hero-subhead {
+    text-wrap: balance;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -96,4 +99,88 @@
     color: var(--text-on-dark);
     border-color: var(--text-secondary);
     transform: translateY(-2px);
+}
+
+/* Photo tile: a large rounded card under the CTAs, like a product shot */
+
+.hero-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(56px, 8vw, 88px);
+    padding: 0 var(--gutter);
+}
+
+.hero-photo {
+    width: min(480px, 100%);
+    aspect-ratio: 1;
+    border-radius: 28px;
+    overflow: hidden;
+    background: #1d1d1f;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Headroom so the parallax drift never reveals the frame's edge */
+    scale: 1.12;
+}
+
+/* Desktop: text and photo side by side, sized so the whole hero fits in one screen */
+
+@media (min-width: 1069px) {
+    .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        padding-top: calc(var(--nav-height) + 40px);
+        padding-bottom: 40px;
+        text-align: left;
+    }
+
+    .hero-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(48px, 5vw, 80px);
+    }
+
+    .hero-text {
+        align-items: flex-start;
+    }
+
+    .hero-text .headline--xl {
+        font-size: clamp(56px, 5.6vw, 84px);
+    }
+
+    /* "Hi, I'm" / "Akindu Kalhan" on two lines */
+    .hero-name {
+        display: block;
+    }
+
+    .hero-subhead {
+        max-width: none;
+        font-size: clamp(21px, 1.8vw, 26px);
+    }
+
+    .hero-subhead-secondary {
+        font-size: 0.72em;
+    }
+
+    .hero-action,
+    .social-icons {
+        justify-content: flex-start;
+    }
+
+    .hero-stage {
+        margin-top: 0;
+        padding: 0;
+        justify-content: flex-end;
+    }
+
+    .hero-photo {
+        /* Never taller than the space left below the nav bar */
+        width: min(100%, 560px, calc(100svh - var(--nav-height) - 96px));
+    }
 }
