@@ -70,7 +70,10 @@ const Hero = () => {
         <HeroBackground />
         <div className="container hero-text parallax" ref={textRef}>
             <h1 className="headline headline--xl reveal">Hi, I'm Akindu Kalhan</h1>
-            <h2 className="subhead hero-subhead reveal" style={{ '--reveal-delay': '0.1s' }}>Electrical Engineering Undergraduate at University of Moratuwa</h2>
+            <h2 className="subhead hero-subhead reveal" style={{ '--reveal-delay': '0.1s' }}>
+                <span>Associate Software Engineer at Jaseci Labs</span>
+                <span className="hero-subhead-secondary">Electrical Engineering Undergraduate at University of Moratuwa</span>
+            </h2>
             <p className="hero-passion reveal" style={{ '--reveal-delay': '0.2s' }}>Passionate about <TypewriterAnimation phrases={typingPhrases} /></p>
 
             <div className="hero-action reveal" style={{ '--reveal-delay': '0.3s' }}>

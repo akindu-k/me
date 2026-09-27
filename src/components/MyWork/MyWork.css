@@ -112,6 +112,31 @@
     transform: scale(1.04);
 }
 
+/* Show all */
+
+.mywork-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.mywork-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 980px;
+    font-size: 17px;
+    color: var(--text-on-dark);
+    border: 1px solid var(--divider-dark);
+    transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.mywork-more-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--text-secondary);
+}
+
 /* Modal */
 
 .project-modal-overlay {
@@ -257,26 +282,26 @@
     }
 
     .project-card:first-child,
-    .project-card:last-child {
+    .project-card--tablet-wide {
         grid-column: span 2;
         flex-direction: row;
     }
 
     .project-card:first-child .project-info,
-    .project-card:last-child .project-info {
+    .project-card--tablet-wide .project-info {
         flex: 0 0 46%;
         justify-content: center;
         padding: 40px 8px 40px 40px;
     }
 
     .project-card:first-child .project-image-container,
-    .project-card:last-child .project-image-container {
+    .project-card--tablet-wide .project-image-container {
         margin: 40px 0 40px 28px;
         border-radius: 14px 0 0 14px;
     }
 
     .project-card:first-child .project-info h3,
-    .project-card:last-child .project-info h3 {
+    .project-card--tablet-wide .project-info h3 {
         font-size: 32px;
     }
 }
@@ -289,21 +314,21 @@
 
     .project-card,
     .project-card:first-child,
-    .project-card:last-child {
+    .project-card--tablet-wide {
         grid-column: auto;
         flex-direction: column;
     }
 
     .project-card .project-info,
     .project-card:first-child .project-info,
-    .project-card:last-child .project-info {
+    .project-card--tablet-wide .project-info {
         flex: 0 0 auto;
         padding: 30px 26px 20px;
     }
 
     .project-card .project-image-container,
     .project-card:first-child .project-image-container,
-    .project-card:last-child .project-image-container {
+    .project-card--tablet-wide .project-image-container {
         align-self: stretch;
         margin: auto 20px 0;
         border-radius: 14px 14px 0 0;
@@ -311,7 +336,7 @@
 
     .project-card .project-info h3,
     .project-card:first-child .project-info h3,
-    .project-card:last-child .project-info h3 {
+    .project-card--tablet-wide .project-info h3 {
         font-size: 24px;
     }
 

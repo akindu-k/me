@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 657 435" width="657" height="435">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2c2c2e"/>
+      <stop offset="100%" stop-color="#0b0b0c"/>
+    </linearGradient>
+  </defs>
+  <rect width="657" height="435" fill="url(#bg)"/>
+  <g transform="translate(238 30)">
+    <rect width="180" height="375" rx="30" fill="#000" stroke="#3a3a3c" stroke-width="2"/>
+    <text x="160" y="110" text-anchor="end" fill="#fff" font-size="46" font-family="-apple-system, Helvetica, Arial" font-weight="300">1,024</text>
+    <g font-family="-apple-system, Helvetica, Arial" font-size="15" text-anchor="middle">
+      <circle cx="35" cy="160" r="17" fill="#a5a5a5"/><circle cx="78" cy="160" r="17" fill="#a5a5a5"/><circle cx="121" cy="160" r="17" fill="#a5a5a5"/><circle cx="160" cy="160" r="17" fill="#ff9f0a"/>
+      <circle cx="35" cy="205" r="17" fill="#333"/><circle cx="78" cy="205" r="17" fill="#333"/><circle cx="121" cy="205" r="17" fill="#333"/><circle cx="160" cy="205" r="17" fill="#ff9f0a"/>
+      <circle cx="35" cy="250" r="17" fill="#333"/><circle cx="78" cy="250" r="17" fill="#333"/><circle cx="121" cy="250" r="17" fill="#333"/><circle cx="160" cy="250" r="17" fill="#ff9f0a"/>
+      <circle cx="35" cy="295" r="17" fill="#333"/><circle cx="78" cy="295" r="17" fill="#333"/><circle cx="121" cy="295" r="17" fill="#333"/><circle cx="160" cy="295" r="17" fill="#ff9f0a"/>
+      <rect x="18" y="323" width="77" height="34" rx="17" fill="#333"/><circle cx="121" cy="340" r="17" fill="#333"/><circle cx="160" cy="340" r="17" fill="#ff9f0a"/>
+      <g fill="#fff"><text x="160" y="165">÷</text><text x="160" y="210">×</text><text x="160" y="255">−</text><text x="160" y="300">+</text><text x="160" y="345">=</text></g>
+    </g>
+  </g>
+</svg>

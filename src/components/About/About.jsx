@@ -16,8 +16,8 @@ const skills = [
 
 const achievements = [
     { value: "3+", label: "YEARS IN ACADEMIA", area: "a" },
-    { value: "10+", label: "PROJECTS COMPLETED", area: "b" },
-    { value: "15+", label: "LEADERSHIP ROLES", area: "c" },
+    { value: "15+", label: "PROJECTS COMPLETED", area: "b" },
+    { value: "20+", label: "LEADERSHIP ROLES", area: "c" },
 ]
 
 const About = () => {
@@ -32,7 +32,7 @@ const About = () => {
             <div className="about-bento">
                 <div className="about-tile about-intro card reveal">
                     <img src={profile_img} alt='Profile' className="about-icon"/>
-                    <p className="about-lead">I am Akindu Kalhan, an Electrical Engineering undergraduate from the University of Moratuwa with a strong passion for AI, computer vision, robotics, and embedded systems. I enjoy applying my technical skills to develop innovative solutions that bridge hardware and software, from intelligent electrical systems to autonomous robots.</p>
+                    <p className="about-lead">I am Akindu Kalhan, an Associate Software Engineer at Jaseci Labs and an Electrical Engineering undergraduate at the University of Moratuwa, with a strong passion for AI, computer vision, robotics, and embedded systems. I enjoy applying my technical skills to develop innovative solutions that bridge hardware and software, from intelligent electrical systems to autonomous robots.</p>
                     <p className="about-body">Beyond academics, I have hands-on experience in interdisciplinary projects, research, and leadership roles in clubs and volunteering initiatives. I am eager to contribute to challenging projects in cutting-edge technology fields and continuously learn to push the boundaries of what intelligent systems can achieve.</p>
                 </div>
 

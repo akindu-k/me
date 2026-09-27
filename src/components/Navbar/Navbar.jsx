@@ -6,6 +6,7 @@ const links = [
   { id: "home", label: "Home" },
   { id: "about", label: "About Me" },
   { id: "experience", label: "Experience" },
+  { id: "certifications", label: "Certifications" },
   { id: "work", label: "Projects" },
   { id: "opensource", label: "Open Source" },
   { id: "blog", label: "Blog" },
@@ -52,6 +53,15 @@ const Navbar = () => {
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
   }, [open])
+
+  // The mobile panel and its toggle are hidden above 1000px (see Navbar.css),
+  // so close the menu when crossing into that width or the page stays scroll-locked.
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1001px)')
+    const onChange = (e) => { if (e.matches) setOpen(false) }
+    desktop.addEventListener('change', onChange)
+    return () => desktop.removeEventListener('change', onChange)
+  }, [])
 
   const select = (id) => {
     setMenu(id)

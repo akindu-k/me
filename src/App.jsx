@@ -3,6 +3,7 @@ import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
 import Experience from './components/Experience/Experience'
+import Certifications from './components/Certifications/Certifications'
 import MyWork from './components/MyWork/MyWork'
 import OpenSource from './components/OpenSource/OpenSource'
 import BlogPosts from './components/Services/Services' // Updated name but same import path
@@ -18,6 +19,7 @@ const App = () => {
       <Hero/>
       <About/>
       <Experience/>
+      <Certifications/>
       <MyWork/>
       <OpenSource/>
       <BlogPosts/>
