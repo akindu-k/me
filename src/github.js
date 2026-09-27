@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 const API = 'https://api.github.com'
 const CACHE_TTL = 24 * 60 * 60 * 1000 // refresh at most once a day per visitor
@@ -90,13 +90,14 @@ const fetchJson = async (url) => {
 // (read from the pagination Link header of a one-per-page request).
 export const useGithubCommits = (repo, author, count = 8) => {
   const key = `gh-commits:${repo}:${author}:${count}`
-  // Show whatever was saved last right away, even if it is more than a day old.
-  const [cached] = useState(() => readCache(key))
-  const [state, setState] = useState(() =>
-    cached ? { status: 'ready', ...cached.data } : { status: 'loading' }
-  )
+  // Start as 'loading' on the server and on the first client render so the
+  // prerendered HTML hydrates cleanly; the saved result (even if older than
+  // a day) is applied in a layout effect, before the first paint.
+  const [state, setState] = useState({ status: 'loading' })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const cached = readCache(key)
+    if (cached) setState({ status: 'ready', ...cached.data })
     if (cached?.fresh) return
     let cancelled = false
 
@@ -129,7 +130,7 @@ export const useGithubCommits = (repo, author, count = 8) => {
 
     load()
     return () => { cancelled = true }
-  }, [key, repo, author, count, cached])
+  }, [key, repo, author, count])
 
   return state
 }

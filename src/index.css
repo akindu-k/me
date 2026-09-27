@@ -294,7 +294,9 @@ button {
 
 /* ---------- Motion ---------- */
 
-.reveal {
+/* Hidden start state only when JS is running (see index.html), so the
+   prerendered page is readable without scripts. */
+.js .reveal {
     opacity: 0;
     transform: translateY(40px) scale(0.96);
     transition: opacity 1s var(--ease), transform 1s var(--ease);
@@ -302,7 +304,7 @@ button {
     will-change: opacity, transform;
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
     opacity: 1;
     transform: none;
 }
@@ -312,7 +314,7 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
     .parallax { transform: none !important; }
     *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
