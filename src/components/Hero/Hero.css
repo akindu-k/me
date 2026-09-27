@@ -20,13 +20,6 @@
     pointer-events: none;
 }
 
-/* Static stand-in when WebGL is unavailable */
-.hero--no-webgl {
-    background:
-        radial-gradient(120% 45% at 50% 100%, rgba(110, 90, 255, 0.35), transparent 70%),
-        var(--black);
-}
-
 .hero-text {
     position: relative;
     display: flex;
