@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import './OpenSource.css'
 import { FiGithub, FiGitCommit, FiArrowUpRight, FiChevronDown, FiChevronUp } from 'react-icons/fi'
 import { useReveal } from '../../motion'
+import { useGithubCommits, focusAreasFrom } from '../../github'
 
+const REPO = 'jaseci-labs/jac'
+const AUTHOR = 'akindu-k'
+
+// Shown if the GitHub API is unreachable (offline, rate-limited).
 const jaseci_commits = [
     {
         sha: "6ea93a9",
@@ -54,10 +59,21 @@ const jaseci_commits = [
     }
 ]
 
+const fallbackFocus = ["Database Robustness", "Redis Caching", "Async LLM"]
+
+const formatUpdated = (iso) =>
+    new Date(iso).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
+
 const OpenSource = () => {
     const [showAll, setShowAll] = useState(false)
-    const visible = showAll ? jaseci_commits : jaseci_commits.slice(0, 4)
     const ref = useReveal()
+    const github = useGithubCommits(REPO, AUTHOR, 8)
+
+    const live = github.status === 'ready'
+    const commits = live ? github.commits : jaseci_commits
+    const total = live ? github.total : jaseci_commits.length
+    const focus = (live && focusAreasFrom(github.commits).length) ? focusAreasFrom(github.commits) : fallbackFocus
+    const visible = showAll ? commits : commits.slice(0, 4)
 
     return (
         <section id="opensource" className="opensource section section--white" ref={ref}>
@@ -70,11 +86,11 @@ const OpenSource = () => {
                     <FiGithub className="oss-gh-icon" />
                     <h2 className="oss-repo-name">
                         <a
-                            href="https://github.com/jaseci-labs/jaseci"
+                            href={`https://github.com/${REPO}`}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            jaseci-labs / jaseci
+                            jaseci-labs / jac
                             <FiArrowUpRight className="oss-ext-icon" />
                         </a>
                     </h2>
@@ -84,40 +100,61 @@ const OpenSource = () => {
                     <div className="oss-focus">
                         <span className="oss-focus-label">Focus areas:</span>
                         <div className="oss-focus-tags">
-                            <span className="pill">Database Robustness</span>
-                            <span className="pill">Redis Caching</span>
-                            <span className="pill">Async LLM</span>
+                            {focus.map((area) => <span className="pill" key={area}>{area}</span>)}
                         </div>
                     </div>
                 </div>
 
-                <div className="oss-tile oss-stat card reveal" style={{ '--reveal-delay': '0.08s' }}>
+                <a
+                    className="oss-tile oss-stat card card--hover reveal"
+                    style={{ '--reveal-delay': '0.08s' }}
+                    href={`https://github.com/${REPO}/commits?author=${AUTHOR}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     <FiGitCommit className="oss-stat-icon" />
-                    <p className="oss-stat-value">{jaseci_commits.length}</p>
+                    <p className={`oss-stat-value ${github.status === 'loading' ? 'is-loading' : ''}`}>{github.status === 'loading' ? '–' : total}</p>
                     <p className="oss-stat-label">commits</p>
-                </div>
+                </a>
 
                 <div className="oss-tile oss-commits card reveal" style={{ '--reveal-delay': '0.16s' }}>
-                    <div className="oss-commits-label">Recent Contributions</div>
-                    <div className="oss-commits-list">
-                        {visible.map((commit, i) => (
-                            <div className="oss-commit" key={i}>
-                                <span className="oss-sha">{commit.sha}</span>
-                                <p className="oss-commit-msg">{commit.message}</p>
-                                <div className="oss-commit-tags">
-                                    {commit.tags.map((tag, ti) => (
-                                        <span className="oss-commit-tag" key={ti}>{tag}</span>
-                                    ))}
-                                </div>
-                                <span className="oss-commit-date">{commit.date}</span>
-                            </div>
-                        ))}
+                    <div className="oss-commits-head">
+                        <div className="oss-commits-label">Recent Contributions</div>
+                        {live && (
+                            <span className="oss-live" title={`Fetched from GitHub ${formatUpdated(github.fetchedAt)}`}>
+                                <span className="oss-live-dot" /> Live from GitHub · {formatUpdated(github.fetchedAt)}
+                            </span>
+                        )}
+                    </div>
+                    <div className="oss-commits-list" aria-busy={github.status === 'loading'}>
+                        {github.status === 'loading'
+                            ? [0, 1, 2, 3].map((i) => <div className="oss-commit oss-commit--skeleton" key={i}><span /><span /><span /></div>)
+                            : visible.map((commit) => (
+                                <a
+                                    className="oss-commit"
+                                    key={commit.sha}
+                                    href={commit.url || `https://github.com/${REPO}/commit/${commit.sha}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <span className="oss-sha">{commit.sha}</span>
+                                    <p className="oss-commit-msg">{commit.message}</p>
+                                    <div className="oss-commit-tags">
+                                        {commit.tags.map((tag, ti) => (
+                                            <span className="oss-commit-tag" key={ti}>{tag}</span>
+                                        ))}
+                                    </div>
+                                    <span className="oss-commit-date">{commit.date}</span>
+                                </a>
+                            ))}
                     </div>
 
                     <div className="oss-actions">
-                        <button className="oss-show-more" onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>
-                            {showAll ? <>Show less <FiChevronUp /></> : <>Show all {jaseci_commits.length} commits <FiChevronDown /></>}
-                        </button>
+                        {commits.length > 4 && github.status !== 'loading' && (
+                            <button className="oss-show-more" onClick={() => setShowAll(!showAll)} aria-expanded={showAll}>
+                                {showAll ? <>Show less <FiChevronUp /></> : <>Show all {commits.length} recent commits <FiChevronDown /></>}
+                            </button>
+                        )}
 
                         <a
                             href="https://github.com/akindu-k"

@@ -76,6 +76,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    color: inherit;
 }
 
 .oss-stat-icon {
@@ -101,13 +102,43 @@
     grid-column: 1 / -1;
 }
 
+.oss-commits-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px 16px;
+    margin-bottom: 8px;
+}
+
+.oss-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.oss-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #30d158;
+    box-shadow: 0 0 0 0 rgba(48, 209, 88, 0.5);
+    animation: oss-pulse 2.4s var(--ease) infinite;
+}
+
+@keyframes oss-pulse {
+    70% { box-shadow: 0 0 0 6px rgba(48, 209, 88, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(48, 209, 88, 0); }
+}
+
 .oss-commits-label {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-secondary);
-    margin-bottom: 8px;
 }
 
 .oss-commit {
@@ -118,6 +149,32 @@
     padding: 18px 0;
     border-bottom: 1px solid var(--divider);
     animation: oss-in 0.5s var(--ease) both;
+    transition: background-color 0.2s var(--ease);
+}
+
+a.oss-commit:hover .oss-commit-msg {
+    color: var(--link);
+}
+
+.oss-commit--skeleton span {
+    display: block;
+    height: 14px;
+    border-radius: 7px;
+    background: linear-gradient(90deg, #e8e8ed 25%, #f5f5f7 50%, #e8e8ed 75%);
+    background-size: 200% 100%;
+    animation: oss-shimmer 1.4s linear infinite;
+}
+
+.oss-commit--skeleton span:nth-child(1) { width: 64px; }
+.oss-commit--skeleton span:nth-child(2) { width: 70%; }
+.oss-commit--skeleton span:nth-child(3) { width: 80px; grid-column: 4; }
+
+@keyframes oss-shimmer {
+    to { background-position: -200% 0; }
+}
+
+.oss-stat-value.is-loading {
+    color: var(--divider);
 }
 
 @keyframes oss-in {
@@ -136,6 +193,7 @@
 .oss-commit-msg {
     font-size: 15px;
     font-weight: 500;
+    transition: color 0.2s var(--ease);
 }
 
 .oss-commit-tags {
