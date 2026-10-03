@@ -18,6 +18,7 @@ import project_alii from "../../assets/project_alii.svg"
 import project_voice_assistant from "../../assets/project_voice_assistant.svg"
 import project_audio_visualizer from "../../assets/project_audio_visualizer.svg"
 import project_calculator from "../../assets/project_calculator.svg"
+import project_pagewise from "../../assets/project_pagewise.webp"
 
 import { FiArrowUpRight, FiChevronDown, FiChevronUp, FiGithub, FiX } from 'react-icons/fi';
 import { useReveal } from '../../motion'
@@ -135,16 +136,26 @@ const mywork_data = [
         w_desc: "A calculator inspired by the iOS calculator's UI, built with HTML, CSS and JavaScript. Supports the four basic operations, full keyboard input, a context-aware clear button and a delete key for precise edits.",
         w_img: project_calculator,
         w_tags: ["HTML", "CSS", "JavaScript"]
+    },
+    {
+        w_no: 15,
+        w_name: "Pagewise",
+        w_desc: "A free, self-hosted PDF toolkit with six tools: merge, split and compress PDFs, convert JPG and Markdown to PDF, and turn PDFs into editable Word documents. Built with Node.js and Express, using Puppeteer, pdf-lib, Ghostscript and pdf2docx, with an accessible UI that scores 100 on Lighthouse SEO.",
+        w_img: project_pagewise,
+        w_tags: ["Node.js", "Express", "Puppeteer", "PDF Processing"],
+        w_link: "https://md-to-pdf-zckb.onrender.com/",
+        w_link_label: "Try it live",
+        w_github: "https://github.com/akindu-k/pagewise"
     }
 ];
 
-// Where a project card links to: its repo, else a demo/live link, else nothing.
-const projectLink = (work) =>
-    work.w_github
-        ? { href: work.w_github, label: "View on GitHub", github: true }
-        : work.w_link
-            ? { href: work.w_link, label: work.w_link_label || "View project", github: false }
-            : null;
+// A project's links, most important first: a live demo/site when there is
+// one, then the repo. Cards show the first; the modal shows all of them.
+const projectLinks = (work) => [
+    work.w_link && { href: work.w_link, label: work.w_link_label || "View project", github: false },
+    work.w_github && { href: work.w_github, label: "View on GitHub", github: true },
+].filter(Boolean);
+const projectLink = (work) => projectLinks(work)[0] || null;
 
 
 
@@ -152,9 +163,10 @@ const projectLink = (work) =>
 // Tiles shown before "Show all".
 const INITIAL_COUNT = 4
 // Bento layout: these tiles span two columns, chosen so every row of the
-// 3-column grid is full (collapsed: 2 rows of 4 tiles; expanded: 6 rows).
+// 3-column grid is full (collapsed: 2 rows of 4 tiles; expanded: 6 rows of
+// 15 tiles). Update WIDE_EXPANDED whenever a project is added or removed.
 const WIDE_COLLAPSED = new Set([0, 3])
-const WIDE_EXPANDED = new Set([0, 6, 11, 13])
+const WIDE_EXPANDED = new Set([0, 6, 14])
 
 const MyWork = () => {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -270,15 +282,20 @@ const MyWork = () => {
                           </div>
                           <h2>{selectedProject.w_name}</h2>
                           <p className="modal-description">{selectedProject.w_desc}</p>
-                          {projectLink(selectedProject) && (
-                              <a
-                                  href={projectLink(selectedProject).href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="btn btn--primary modal-github-link"
-                              >
-                                  {projectLink(selectedProject).github ? <FiGithub /> : <FiArrowUpRight />} {projectLink(selectedProject).label}
-                              </a>
+                          {projectLinks(selectedProject).length > 0 && (
+                              <div className="modal-links">
+                                  {projectLinks(selectedProject).map((link, index) => (
+                                      <a
+                                          key={link.href}
+                                          href={link.href}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className={`btn ${index === 0 ? 'btn--primary' : 'btn--outline'}`}
+                                      >
+                                          {link.github ? <FiGithub /> : <FiArrowUpRight />} {link.label}
+                                      </a>
+                                  ))}
+                              </div>
                           )}
                       </div>
                       <div className="modal-image-container">
