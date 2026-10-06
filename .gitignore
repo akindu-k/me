@@ -27,3 +27,6 @@ dist-ssr
 .env
 .env.local
 .env.development
+
+# Written by scripts/github-snapshot.mjs at build / dev start
+src/generated

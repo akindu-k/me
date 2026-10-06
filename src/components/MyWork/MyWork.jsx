@@ -4,14 +4,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 // import theme_pattern from "../../assets/theme_pattern.svg"
 
-import project1_img from "../../assets/project_1.svg"
-import project2_img from "../../assets/project_2.svg"
-import project3_img from "../../assets/project_3.svg"
-import project4_img from "../../assets/project_4.svg"
-import project5_img from "../../assets/project_5.svg"
-import project6_img from "../../assets/project_6.svg"
-import project_cutflow from "../../assets/project_cutflow.svg"
-import project_festival_card from "../../assets/project_festival_card.svg"
+import project_robo_arm from "../../assets/project_1.webp"
+import project_seian from "../../assets/project_2.webp"
+import project_taskmate from "../../assets/project_3.webp"
+import project_email_bot from "../../assets/project_4.webp"
+import project_tripmate from "../../assets/project_5.webp"
+import project_codebase_genius from "../../assets/project_6.webp"
+import project_cutflow from "../../assets/project_cutflow.webp"
+import project_festival_card from "../../assets/project_festival_card.webp"
 import project_leo_rag from "../../assets/project_leo_rag.svg"
 import project_batch_voting from "../../assets/project_batch_voting.svg"
 import project_alii from "../../assets/project_alii.svg"
@@ -19,63 +19,102 @@ import project_voice_assistant from "../../assets/project_voice_assistant.svg"
 import project_audio_visualizer from "../../assets/project_audio_visualizer.svg"
 import project_calculator from "../../assets/project_calculator.svg"
 import project_pagewise from "../../assets/project_pagewise.webp"
+import project_keepwarm from "../../assets/project_keepwarm.webp"
 
 import { FiArrowUpRight, FiChevronDown, FiChevronUp, FiGithub, FiX } from 'react-icons/fi';
 import { useReveal } from '../../motion'
 
 
 
+// Ordered by a weighted score: relevance to AI / software / robotics work
+// (30%), engineering depth (25%), ownership (20%), proof such as a live demo,
+// public repo or screenshots (15%) and recency (10%). The first four, shown
+// before "Show all", also cover four different areas: AI, web products,
+// robotics and power/IoT.
 const mywork_data = [
     {
         w_no: 1,
+        w_name: "Leo RAG System",
+        w_desc: "A production-grade RAG chatbot for the Leo Movement that answers only from uploaded documents, citing the title, page and section behind every answer. Hybrid retrieval merges vector and keyword search, a second LLM pass audits each claim against its sources, and answers stream token by token. Built with FastAPI, Qdrant, Supabase and OpenAI.",
+        w_img: project_leo_rag,
+        w_tags: ["RAG", "FastAPI", "Qdrant", "OpenAI"],
+        w_github: "https://github.com/akindu-k/leo-rag-system"
+    },
+    {
+        w_no: 2,
+        w_name: "KeepWarm",
+        w_desc: "Keeps Render free-tier services awake so visitors never wait for a cold start. Pings each service on its own schedule inside daily keep-warm windows, fits them into Render's 750 free instance hours, flags cold starts and streams every request to a live dashboard. Includes Slack/Discord alerts and Prometheus metrics, with Express as its only runtime dependency.",
+        w_img: project_keepwarm,
+        w_tags: ["Node.js", "Express", "SQLite", "Server-Sent Events"],
+        w_github: "https://github.com/akindu-k/keepwarm",
+        w_link: "https://keepwarm-t741.onrender.com/",
+        w_link_label: "Live dashboard (password-protected)",
+        w_link_secondary: true
+    },
+    {
+        w_no: 3,
         w_name: "Vision-Based Object Sorting Robot Arm",
         w_desc: "Built a robotic arm that detects and sorts colored objects using webcam-based vision, a custom color sensor, and ultrasonic sensing. Integrated inverse kinematics, LabVIEW control, and an ensemble ML approach for accurate real-time classification.",
-        w_img: project1_img,
+        w_img: project_robo_arm,
         w_tags: ["Computer Vision", "Robotics", "Instrumentation"],
         w_github: "https://github.com/akindu-k/robo-arm"
     },
     {
-        w_no: 2,
+        w_no: 4,
         w_name: "Smart Energy Integration and Automation Network (SEIAN)",
         w_desc: "Developed an intelligent solar inverter system capable of seamless power sharing, microgrid creation, and grid stabilization. SEIAN integrates AI-driven control and IoT-based monitoring to optimize energy utilization, enhance reliability, and scale from household to industrial applications.",
-        w_img: project2_img,
+        w_img: project_seian,
         w_tags: ["Smart Grid", "IoT", "Renewable Energy"],
-        w_github: "https://github.com/OshadhaPathirana/Smart-Energy-Automation-and-Integration-Network-2025.git"
+        w_github: "https://github.com/OshadhaPathirana/Smart-Energy-Automation-and-Integration-Network-2025"
     },
     {
-        w_no: 3,
+        w_no: 5,
+        w_name: "Pagewise",
+        w_desc: "A free, self-hosted PDF toolkit with six tools: merge, split and compress PDFs, convert JPG and Markdown to PDF, and turn PDFs into editable Word documents. Built with Node.js and Express, using Puppeteer, pdf-lib, Ghostscript and pdf2docx, with an accessible UI that scores 100 on Lighthouse SEO.",
+        w_img: project_pagewise,
+        w_tags: ["Node.js", "Express", "Puppeteer", "PDF Processing"],
+        w_link: "https://md-to-pdf-zckb.onrender.com/",
+        w_link_label: "Try it live",
+        w_github: "https://github.com/akindu-k/pagewise"
+    },
+    {
+        w_no: 6,
         w_name: "TaskMate",
         w_desc: "Built an AI-powered task management system that automates task assignment based on employee skills and availability. Integrated frontend and backend using Ballerina middleware, leveraging the Gemini-1.5-Flash AI model for intelligent task allocation and enabling third-party integrations",
-        w_img: project3_img,
+        w_img: project_taskmate,
         w_tags: ["AI", "Task Automation", "Middleware Integration"],
         w_github: "https://github.com/akindu-k/iwb013-team-tricannu"
     },
     {
-        w_no: 4,
-        w_name: "Smart Email Automation Assistant",
-        w_desc: "Created an AI-powered assistant that reads and sends emails directly through a Telegram bot. Integrated Gmail API for automation, Gemini 1.5 Flash for intelligent responses, and n8n for workflow orchestration, demonstrating how AI and automation can streamline daily communication.",
-        w_img: project4_img,
-        w_tags: ["AI Automation", "Workflow Orchestration", "Productivity"],
-        w_github: "https://github.com/akindu-k/ai-telegram-gmail-bot"
+        w_no: 7,
+        w_name: "Live Voting Dashboard",
+        w_desc: "A real-time voting results dashboard integrating Google Forms and Sheets with a React frontend. Features secure serverless architecture keeping credentials server-side, auto-refreshing charts, animated winner reveals with confetti, and configurable vote weighting.",
+        w_img: project_batch_voting,
+        w_tags: ["React", "Google Sheets API", "Vercel", "Chart.js"],
+        w_link: "https://batch-rep-voting.vercel.app",
+        w_link_label: "View live",
+        w_github: "https://github.com/akindu-k/batch-rep-voting"
     },
     {
-        w_no: 5,
+        w_no: 8,
         w_name: "TripMate",
         w_desc: "Developed a web application that helps users plan budget-efficient trips by integrating cost estimation, itinerary planning, and trip optimization. Built with React for the frontend and Spring Boot for the backend, ensuring a scalable and user-friendly travel planning experience.",
-        w_img: project5_img,
+        w_img: project_tripmate,
         w_tags: ["ReactJS", "Spring Boot", "Full-Stack Development"],
+        w_link: "https://tripmate-ecru.vercel.app/",
+        w_link_label: "Visit site",
         w_github: "https://github.com/Company-B-MSD/tripmate"
     },
     {
-        w_no: 6,
+        w_no: 9,
         w_name: "Codebase Genius",
         w_desc: "Built an AI documentation agent that ingests GitHub repos and automatically generates clear, structured, and visual documentation using specialized agents for mapping, code analysis, and generation.",
-        w_img: project6_img,
+        w_img: project_codebase_genius,
         w_tags: ["AI Agents", "Automation", "Developer Tools"],
-        w_github: "https://github.com/RavimalRanathunga/Team-Nova-Codebase-Genius"
+        w_github: "https://github.com/RavimalRanathunga/Codebase-Genius"
     },
     {
-        w_no: 7,
+        w_no: 10,
         w_name: "CutFlow",
         w_desc: "A digital real-time Kanban board replacing physical whiteboards in garment factory cutting rooms. Features drag-and-drop across 8 production stages, Socket.IO live sync, priority classification with KPI dashboards, and dark/light theme support.",
         w_img: project_cutflow,
@@ -83,43 +122,22 @@ const mywork_data = [
         w_github: "https://github.com/akindu-k/CutFlow"
     },
     {
-        w_no: 8,
-        w_name: "Festival Card Creator",
-        w_desc: "A web application for generating and downloading custom festival greeting cards. Users can personalize cards for various occasions and share them instantly.",
+        w_no: 11,
+        w_name: "Vesak Card Creator",
+        w_desc: "A greeting card creator for Vesak Poya Day with 7 templates, 30+ curated messages, custom photo backgrounds and full style controls. Cards export as high-resolution PNG or print-ready PDF, copy to the clipboard or share through the device share sheet, with undo/redo, favourites and Supabase accounts for community features.",
         w_img: project_festival_card,
-        w_tags: ["TypeScript", "React", "Vercel"],
+        w_tags: ["TypeScript", "React", "Supabase", "Vercel"],
+        w_link: "https://festival-card-creator.vercel.app",
+        w_link_label: "Try it live",
         w_github: "https://github.com/akindu-k/festival-card-creator"
     },
     {
-        w_no: 9,
-        w_name: "Leo RAG System",
-        w_desc: "A production-grade RAG chatbot that answers questions exclusively from uploaded documents with full citations and real-time token streaming. Built with FastAPI, Qdrant vector store, and OpenAI embeddings, featuring hybrid retrieval and per-user access control.",
-        w_img: project_leo_rag,
-        w_tags: ["FastAPI", "RAG", "OpenAI", "Qdrant"],
-        w_github: "https://github.com/akindu-k/leo-rag-system"
-    },
-    {
-        w_no: 10,
-        w_name: "Live Voting Dashboard",
-        w_desc: "A real-time voting results dashboard integrating Google Forms and Sheets with a React frontend. Features secure serverless architecture keeping credentials server-side, auto-refreshing charts, animated winner reveals with confetti, and configurable vote weighting.",
-        w_img: project_batch_voting,
-        w_tags: ["React", "Google Sheets API", "Vercel", "Chart.js"],
-        w_github: "https://github.com/akindu-k/batch-rep-voting"
-    },
-    {
-        w_no: 11,
-        w_name: "Advanced Light Intensity Indicator (ALII)",
-        w_desc: "A smart module built for the EE3024 Digital Signal Processing course that senses light with an LDR and shows the level from 0 to 7 on a seven-segment display. An adjustable stabilization period (30–300 s) ignores sudden fluctuations, and it can show the average intensity over 300–900 s, with a path to solar-powered operation for smart-city energy management.",
-        w_img: project_alii,
-        w_tags: ["Digital Signal Processing", "Sensor Integration", "Circuit Design"]
-    },
-    {
         w_no: 12,
-        w_name: "Voice Assistant with GPT-3 and IBM Watson",
-        w_desc: "A voice-powered assistant that captures speech with speech-to-text, answers with OpenAI's GPT-3 and replies through text-to-speech. Built as a full-stack web app with a Python Flask backend and an HTML, CSS and JavaScript frontend.",
-        w_img: project_voice_assistant,
-        w_tags: ["NLP", "Python Flask", "OpenAI"],
-        w_github: "https://github.com/akindu-k/chatapp-with-voice-and-openai-outline"
+        w_name: "Smart Email Automation Assistant",
+        w_desc: "Created an AI-powered assistant that reads and sends emails directly through a Telegram bot. Integrated Gmail API for automation, Gemini 1.5 Flash for intelligent responses, and n8n for workflow orchestration, demonstrating how AI and automation can streamline daily communication.",
+        w_img: project_email_bot,
+        w_tags: ["AI Automation", "Workflow Orchestration", "Productivity"],
+        w_github: "https://github.com/akindu-k/ai-telegram-gmail-bot"
     },
     {
         w_no: 13,
@@ -132,29 +150,36 @@ const mywork_data = [
     },
     {
         w_no: 14,
+        w_name: "Advanced Light Intensity Indicator (ALII)",
+        w_desc: "A smart module built for the EE3024 Digital Signal Processing course that senses light with an LDR and shows the level from 0 to 7 on a seven-segment display. An adjustable stabilization period (30–300 s) ignores sudden fluctuations, and it can show the average intensity over 300–900 s, with a path to solar-powered operation for smart-city energy management.",
+        w_img: project_alii,
+        w_tags: ["Digital Signal Processing", "Sensor Integration", "Circuit Design"]
+    },
+    {
+        w_no: 15,
+        w_name: "Voice Assistant with GPT-3 and IBM Watson",
+        w_desc: "A voice-powered assistant built in an IBM Skills Network guided project: it captures speech with speech-to-text, answers with OpenAI's GPT-3 and replies through text-to-speech. A full-stack web app with a Python Flask backend and an HTML, CSS and JavaScript frontend.",
+        w_img: project_voice_assistant,
+        w_tags: ["NLP", "Python Flask", "OpenAI"],
+        w_github: "https://github.com/akindu-k/chatapp-with-voice-and-openai-outline"
+    },
+    {
+        w_no: 16,
         w_name: "Akindu's Calculator",
         w_desc: "A calculator inspired by the iOS calculator's UI, built with HTML, CSS and JavaScript. Supports the four basic operations, full keyboard input, a context-aware clear button and a delete key for precise edits.",
         w_img: project_calculator,
         w_tags: ["HTML", "CSS", "JavaScript"]
-    },
-    {
-        w_no: 15,
-        w_name: "Pagewise",
-        w_desc: "A free, self-hosted PDF toolkit with six tools: merge, split and compress PDFs, convert JPG and Markdown to PDF, and turn PDFs into editable Word documents. Built with Node.js and Express, using Puppeteer, pdf-lib, Ghostscript and pdf2docx, with an accessible UI that scores 100 on Lighthouse SEO.",
-        w_img: project_pagewise,
-        w_tags: ["Node.js", "Express", "Puppeteer", "PDF Processing"],
-        w_link: "https://md-to-pdf-zckb.onrender.com/",
-        w_link_label: "Try it live",
-        w_github: "https://github.com/akindu-k/pagewise"
     }
 ];
 
 // A project's links, most important first: a live demo/site when there is
 // one, then the repo. Cards show the first; the modal shows all of them.
-const projectLinks = (work) => [
-    work.w_link && { href: work.w_link, label: work.w_link_label || "View project", github: false },
-    work.w_github && { href: work.w_github, label: "View on GitHub", github: true },
-].filter(Boolean);
+const projectLinks = (work) => {
+    const live = work.w_link && { href: work.w_link, label: work.w_link_label || "View project", github: false };
+    const repo = work.w_github && { href: work.w_github, label: "View on GitHub", github: true };
+    // A live link that visitors can't use (e.g. password-protected) goes after the repo.
+    return (work.w_link_secondary ? [repo, live] : [live, repo]).filter(Boolean);
+};
 const projectLink = (work) => projectLinks(work)[0] || null;
 
 
@@ -164,9 +189,10 @@ const projectLink = (work) => projectLinks(work)[0] || null;
 const INITIAL_COUNT = 4
 // Bento layout: these tiles span two columns, chosen so every row of the
 // 3-column grid is full (collapsed: 2 rows of 4 tiles; expanded: 6 rows of
-// 15 tiles). Update WIDE_EXPANDED whenever a project is added or removed.
-const WIDE_COLLAPSED = new Set([0, 3])
-const WIDE_EXPANDED = new Set([0, 6, 14])
+// 16 tiles). Expanding only adds rows below, so the first four stay put.
+// Update WIDE_EXPANDED whenever a project is added or removed.
+const WIDE_COLLAPSED = new Set([0, 2])
+const WIDE_EXPANDED = new Set([0, 2])
 
 const MyWork = () => {
     const [selectedProject, setSelectedProject] = useState(null);
