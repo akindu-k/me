@@ -3,76 +3,28 @@ import './OpenSource.css'
 import { FiGithub, FiGitCommit, FiArrowUpRight, FiChevronDown, FiChevronUp } from 'react-icons/fi'
 import { useReveal } from '../../motion'
 import { useGithubCommits, focusAreasFrom } from '../../github'
+import snapshot from '../../generated/github-snapshot.json'
 
 const REPO = 'jaseci-labs/jac'
 const AUTHOR = 'akindu-k'
 
-// Shown if the GitHub API is unreachable (offline, rate-limited).
-const jaseci_commits = [
-    {
-        sha: "6ea93a9",
-        message: "invalidate Redis L2 cache on cascade quarantine",
-        date: "2026-05-27",
-        tags: ["Redis", "Caching"]
-    },
-    {
-        sha: "1db5e9e",
-        message: "recover non-Optional fields stored as None instead of quarantining",
-        date: "2026-05-26",
-        tags: ["Data Recovery"]
-    },
-    {
-        sha: "33d819c",
-        message: "`recover_all` processes edges before nodes; silent re-link warning",
-        date: "2026-05-26",
-        tags: ["Graph", "Recovery"]
-    },
-    {
-        sha: "dc58f77",
-        message: "strip empty dicts in `_put_node_atomic` to avoid MongoDB error",
-        date: "2026-05-25",
-        tags: ["MongoDB", "Bug Fix"]
-    },
-    {
-        sha: "93567b9",
-        message: "`_put_node_atomic` clobbers scalars via shallow `$mergeObjects`",
-        date: "2026-05-19",
-        tags: ["MongoDB", "Bug Fix"]
-    },
-    {
-        sha: "a9b891d",
-        message: "cascade-quarantine edges when their node is quarantined",
-        date: "2026-05-18",
-        tags: ["Data Integrity"]
-    },
-    {
-        sha: "fa49693",
-        message: "add httpx to jac.toml dependencies",
-        date: "2026-05-17",
-        tags: ["Dependencies"]
-    },
-    {
-        sha: "9fc5e99",
-        message: "replace sync LLM clients with async equivalents",
-        date: "2026-05-17",
-        tags: ["Async", "LLM"]
-    }
-]
-
+// Written by scripts/github-snapshot.mjs before every build and dev start, so
+// the prerendered page shows real commits even before the browser refreshes them.
 const fallbackFocus = ["Database Robustness", "Redis Caching", "Async LLM"]
 
+// Fixed locale and time zone so the build-time HTML and the browser agree.
 const formatUpdated = (iso) =>
-    new Date(iso).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
+    new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
 
 const OpenSource = () => {
     const [showAll, setShowAll] = useState(false)
     const ref = useReveal()
-    const github = useGithubCommits(REPO, AUTHOR, 8)
+    const github = useGithubCommits(REPO, AUTHOR, 8, snapshot)
 
     const live = github.status === 'ready'
-    const commits = live ? github.commits : jaseci_commits
-    const total = live ? github.total : jaseci_commits.length
-    const focus = (live && focusAreasFrom(github.commits).length) ? focusAreasFrom(github.commits) : fallbackFocus
+    const commits = live ? github.commits : []
+    const total = live ? github.total : null
+    const focus = focusAreasFrom(commits).length ? focusAreasFrom(commits) : fallbackFocus
     const visible = showAll ? commits : commits.slice(0, 4)
 
     return (
@@ -113,7 +65,7 @@ const OpenSource = () => {
                     rel="noopener noreferrer"
                 >
                     <FiGitCommit className="oss-stat-icon" />
-                    <p className={`oss-stat-value ${github.status === 'loading' ? 'is-loading' : ''}`}>{github.status === 'loading' ? '–' : total}</p>
+                    <p className={`oss-stat-value ${github.status === 'loading' ? 'is-loading' : ''}`}>{total ?? '–'}</p>
                     <p className="oss-stat-label">commits</p>
                 </a>
 

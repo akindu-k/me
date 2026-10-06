@@ -5,8 +5,9 @@
   "homepage": "https://akindu-k.github.io/me/",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/github-snapshot.mjs",
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "node scripts/github-snapshot.mjs && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
