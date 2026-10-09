@@ -2,7 +2,7 @@
   "name": "me",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://akindu-k.github.io/me/",
+  "homepage": "https://akindukalhan.is-a.dev/",
   "type": "module",
   "scripts": {
     "predev": "node scripts/github-snapshot.mjs",
