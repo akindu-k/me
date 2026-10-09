@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akindukalhan.is-a.dev/sitemap.xml
